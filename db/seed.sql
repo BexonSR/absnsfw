@@ -1,0 +1,99 @@
+-- ============================================================================
+-- CRIMSON — Default Site Configuration Seed (SQL)
+-- Executed on first boot or factory reset alongside data/catalog.json.
+-- ============================================================================
+
+INSERT OR IGNORE INTO site_config (key, value_json, updated_by) VALUES
+(
+  'brand',
+  json('{
+    "brandName": "CRIMSON",
+    "pageTitle": "CRIMSON — Anime Streaming Dashboard & Player",
+    "logoColor": "#ff1e38",
+    "searchPlaceholder": "Search movies, series...",
+    "announcement": "",
+    "requireLoginGate": false
+  }'),
+  'seed'
+),
+(
+  'navigation',
+  json('[
+    { "key": "home",      "label": "Home",      "visible": true },
+    { "key": "movies",    "label": "Movies",    "visible": true },
+    { "key": "series",    "label": "Series",    "visible": true },
+    { "key": "anime",     "label": "Anime",     "visible": true },
+    { "key": "mylist",    "label": "My List",   "visible": true },
+    { "key": "downloads", "label": "Downloads", "visible": true }
+  ]'),
+  'seed'
+),
+(
+  'sections',
+  json('{
+    "showHero": true,
+    "showContinueWatching": true,
+    "showPopularMovies": true,
+    "showNotifications": true,
+    "showCastButton": true,
+    "continueTitle": "Continue Watching",
+    "popularTitle": "Popular Movies",
+    "moviesHeading": "Popular Movies",
+    "moviesSub": "Acclaimed theatrical anime films in crystal-clear 4K HDR",
+    "seriesHeading": "Anime Series",
+    "seriesSub": "Long-running sagas and seasonal simulcasts",
+    "animeHeading": "All Anime Catalog",
+    "animeSub": "Browse every featured series and theatrical masterpiece",
+    "mylistHeading": "My List",
+    "downloadsHeading": "Offline Downloads",
+    "downloadsSub": "Watch downloaded episodes anywhere with zero buffering",
+    "homeOrder": ["hero", "continue", "popular"]
+  }'),
+  'seed'
+),
+(
+  'theme',
+  json('{
+    "crimson": "#e50914",
+    "crimsonBright": "#ff1e38",
+    "darkBg": "#0a0a0e",
+    "darkCardBg": "#121218",
+    "lightBg": "#f4f3f7",
+    "lightCardBg": "#ffffff",
+    "radiusMd": 14,
+    "radiusLg": 18,
+    "blur": 18,
+    "heroMinHeight": 430,
+    "cardMinWidth": 232,
+    "defaultMode": "system"
+  }'),
+  'seed'
+),
+(
+  'player',
+  json('{
+    "introStartSec": 15,
+    "introEndSec": 90,
+    "introSkipToSec": 92,
+    "defaultQuality": "1080p",
+    "defaultAudio": "SUB"
+  }'),
+  'seed'
+),
+(
+  'footer',
+  json('{
+    "visible": true,
+    "brandName": "",
+    "tagline": "Curated anime streaming experience in 4K HDR.",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "col1Title": "Browse",
+    "col1Links": "Home|home\nMovies|movies\nSeries|series\nAll Anime|anime",
+    "col2Title": "Library & Account",
+    "col2Links": "My List|mylist\nDownloads|downloads\nSettings|#settings\nAccount|#auth",
+    "col3Title": "Legal & Info",
+    "col3Links": "Terms of Service|#lorem\nPrivacy Policy|#lorem\nDMCA Notice|#lorem\nHelp Center|#lorem",
+    "copyright": "© 2026 CRIMSON. Lorem ipsum dolor sit amet — All rights reserved."
+  }'),
+  'seed'
+);

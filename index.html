@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0a0a0e" id="meta-theme-color" />
+  <title>CRIMSON — Anime Streaming Dashboard &amp; Player</title>
+
+  <!-- Apply the saved theme BEFORE first paint so there is no flash. -->
+  <script>
+    (function () {
+      try {
+        var mode = localStorage.getItem('crimson_theme') || 'system';
+        var dark = mode === 'dark' || (mode === 'system' && !matchMedia('(prefers-color-scheme: light)').matches);
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="css/cms.css" />
+</head>
+<body>
+
+  <!-- ===== SVG icon sprite (referenced with <use href="#i-name">) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.75L12 3l9 7.75V20a1 1 0 01-1 1h-5.25v-6.25h-5.5V21H4a1 1 0 01-1-1v-9.25z"/></symbol>
+      <symbol id="i-movies" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 016.5 5h11A2.5 2.5 0 0120 7.5v9a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 16.5v-9zM4 9.5h16M8.5 5L7 9.5M14 5l-1.5 4.5"/></symbol>
+      <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.62 5.31 5.86.85-4.24 4.13 1 5.84L12 16.87l-5.24 2.76 1-5.84-4.24-4.13 5.86-.85L12 3.5z"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M4 18.5h16"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h12"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2c0 .53-.21 1.04-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></symbol>
+      <symbol id="i-cast" viewBox="0 0 24 24"><path d="M2 16.1A5 5 0 015.9 20M2 12.05A9 9 0 019.95 20M2 8V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2h-6M2 20h.01"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+      <symbol id="i-chev-down" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></symbol>
+      <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></symbol>
+      <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14m-6-6l6 6-6 6"/></symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7L7 5z"/></symbol>
+      <symbol id="i-play-round" viewBox="0 0 24 24"><path d="M6.5 4.8c0-1.1 1.2-1.8 2.1-1.2l11.6 7.2c.9.55.9 1.85 0 2.4L8.6 20.4c-.9.6-2.1-.1-2.1-1.2V4.8z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></symbol>
+      <symbol id="i-rewind" viewBox="0 0 24 24"><path d="M12.5 8V4L6 9.5l6.5 5.5v-4c4.1 0 7 1.8 7 6.5 0-5.8-2.9-9.5-7-9.5z"/></symbol>
+      <symbol id="i-forward" viewBox="0 0 24 24"><path d="M11.5 8V4L18 9.5 11.5 15v-4c-4.1 0-7 1.8-7 6.5 0-5.8 2.9-9.5 7-9.5z"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zm4.5 3.5a5 5 0 010 7m2.8-9.8a9 9 0 010 12.6"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zm11 4l-6 6m0-6l6 6"/></symbol>
+      <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+      <symbol id="i-next" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></symbol>
+      <symbol id="i-skip" viewBox="0 0 24 24"><path d="M13 5l7 7-7 7M5 5l7 7-7 7"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Ambient background glow -->
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+  </div>
+
+  <!-- Shown only if neither /api/bootstrap nor data/catalog.json could be loaded -->
+  <div id="catalog-error" class="modal is-hidden" role="alert">
+    <div class="modal__card glass-panel">
+      <h3 class="modal__title">Catalog could not be loaded</h3>
+      <p class="setting__hint">Start the SQL + Flask server in this folder and open the printed address:</p>
+      <kbd style="padding:10px 12px">python backend/app.py</kbd>
+      <p class="setting__hint">Then visit <b>http://localhost:8000</b></p>
+    </div>
+  </div>
+
+  <div id="mobile-sidebar-backdrop" class="backdrop"></div>
+
+  <!-- Floating Crimson Triangle Trigger (fixed top-left across every screen) -->
+  <button id="menu-triangle-trigger" class="triangle-trigger" aria-label="Show navigation menu" title="Menu">
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <defs>
+        <filter id="triggerLogoGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <path id="trigger-logo-path" d="M9.5 9.4C9.5 7.6 11.45 6.48 13 7.38L31.3 17.98C32.85 18.88 32.85 21.12 31.3 22.02L13 32.62C11.45 33.52 9.5 32.4 9.5 30.6V9.4Z" stroke="#ff1e38" stroke-width="3.6" stroke-linejoin="round" filter="url(#triggerLogoGlow)" />
+    </svg>
+  </button>
+
+  <div class="app-shell">
+
+    <!-- ============================ SIDEBAR ============================ -->
+    <aside id="sidebar" class="sidebar" aria-label="Primary navigation">
+      <div>
+        <div class="sidebar__brand-row">
+          <button id="brand-logo-btn" class="brand" data-cms-edit="brand" title="Crimson Home" aria-label="Crimson home">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <defs>
+                <filter id="logoGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2.5" result="blur" />
+                  <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+              </defs>
+              <path id="brand-logo-path" d="M9.5 9.4C9.5 7.6 11.45 6.48 13 7.38L31.3 17.98C32.85 18.88 32.85 21.12 31.3 22.02L13 32.62C11.45 33.52 9.5 32.4 9.5 30.6V9.4Z" stroke="#ff1e38" stroke-width="3.6" stroke-linejoin="round" filter="url(#logoGlow)" />
+            </svg>
+            <span class="brand__name" data-brand-name>CRIMSON</span>
+          </button>
+          <button id="mobile-close-sidebar" class="icon-btn sidebar__close" aria-label="Close menu">
+            <svg class="ico ico-stroke" stroke-width="2"><use href="#i-close"/></svg>
+          </button>
+        </div>
+
+        <nav id="sidebar-nav" class="sidebar-nav" data-cms-edit="brand">
+          <div id="nav-active-pill" aria-hidden="true"></div>
+
+          <button data-nav="home" class="nav-item is-active">
+            <span class="nav-item__main"><svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-home"/></svg><span class="nav-label">Home</span></span>
+          </button>
+          <button data-nav="movies" class="nav-item">
+            <span class="nav-item__main"><svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-movies"/></svg><span class="nav-label">Movies</span></span>
+          </button>
+          <button data-nav="series" class="nav-item">
+            <span class="nav-item__main"><svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-tv"/></svg><span class="nav-label">Series</span></span>
+          </button>
+          <button data-nav="anime" class="nav-item">
+            <span class="nav-item__main"><svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-star"/></svg><span class="nav-label">Anime</span></span>
+          </button>
+          <button data-nav="mylist" class="nav-item">
+            <span class="nav-item__main"><svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-grid"/></svg><span class="nav-label">My List</span></span>
+            <span id="mylist-badge" class="nav-count is-badge">0</span>
+          </button>
+          <button data-nav="downloads" class="nav-item">
+            <span class="nav-item__main"><svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-download"/></svg><span class="nav-label">Downloads</span></span>
+            <span id="downloads-badge" class="nav-count">0</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar__foot">
+        <!-- Strictly hidden unless logged in as admin -->
+        <button id="sidebar-studio-btn" data-open-studio="brand" class="side-link admin-only is-hidden" style="color:var(--accent)">
+          <svg class="ico ico-stroke" stroke-width="1.8"><use href="#i-edit"/></svg>
+          <span>Website Studio</span>
+        </button>
+
+        <button id="open-settings-btn" class="side-link">
+          <svg class="ico ico-stroke spin-on-hover" stroke-width="1.8"><use href="#i-settings"/></svg>
+          <span>Settings</span>
+        </button>
+
+        <div class="pos-rel">
+          <button id="profile-menu-btn" class="profile-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="profile-btn__who">
+              <span class="avatar"><img id="profile-avatar-img" data-unified-img alt="User avatar" /></span>
+              <span class="profile-btn__text">
+                <span id="profile-display-name" class="profile-btn__name">Guest Viewer</span>
+                <span id="profile-plan-badge" class="profile-btn__plan truncate">Tap to Sign In</span>
+              </span>
+            </span>
+            <svg id="profile-chevron" class="ico-sm ico-stroke chev" stroke-width="2"><use href="#i-chev-down"/></svg>
+          </button>
+
+          <div id="profile-dropdown" class="dropdown dropdown--profile glass-panel is-hidden" role="menu">
+            <button id="profile-open-studio-btn" data-profile-action="studio" class="menu-item admin-only is-hidden" role="menuitem">
+              <span class="dot"></span>Website Editor Studio
+            </button>
+            <button id="profile-edit-account-btn" data-profile-action="account" class="menu-item is-hidden" role="menuitem">
+              <span class="dot"></span>Edit SQL Profile &amp; Username
+            </button>
+            <button data-profile-action="mylist" class="menu-item" role="menuitem">
+              <span class="dot dot-quiet"></span>My Watchlist
+            </button>
+            <button data-profile-action="settings" class="menu-item" role="menuitem">
+              <span class="dot dot-quiet"></span>Playback Preferences
+            </button>
+            <div class="menu-sep"></div>
+            <button id="profile-signin-menu-btn" data-profile-action="signin" class="menu-item" role="menuitem">
+              Sign In / Create Account
+            </button>
+            <button id="profile-signout-menu-btn" data-profile-action="signout" class="menu-item is-danger is-hidden" role="menuitem">
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============================ MAIN ============================ -->
+    <main class="main">
+
+      <!-- ===== VIEW 1: DASHBOARD ===== -->
+      <div id="dashboard-view" class="view stack stack-md">
+
+        <!-- Optional Announcement Bar editable in Studio -->
+        <div id="announcement-banner" class="announcement-bar is-hidden" data-cms-edit="brand"></div>
+
+        <header class="topbar">
+          <div class="topbar__left">
+            <button id="mobile-menu-btn" class="icon-btn is-boxed hamburger" aria-label="Open navigation">
+              <svg class="ico ico-stroke" stroke-width="2"><use href="#i-menu"/></svg>
+            </button>
+            <div class="search" data-cms-edit="brand">
+              <svg class="search__icon ico-stroke" stroke-width="2" aria-hidden="true"><use href="#i-search"/></svg>
+              <input id="search-input" class="search__input" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Search movies, series..." aria-label="Search titles" />
+              <button id="search-clear-btn" class="search__clear is-hidden" aria-label="Clear search">
+                <svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-close"/></svg>
+              </button>
+              <kbd id="search-kbd" class="search__kbd">/</kbd>
+            </div>
+          </div>
+
+          <div class="topbar__right">
+            <!-- Strictly hidden unless logged in as admin -->
+            <button id="open-studio-btn" data-open-studio="brand" class="btn btn-crimson btn-sm admin-only is-hidden" title="Open Visual Website Editor Studio">
+              <svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-edit"/></svg>
+              <span>Studio</span>
+            </button>
+
+            <!-- Sign In button (when guest) vs Active Username pill (when signed in) -->
+            <button id="topbar-signin-btn" class="btn btn-glass btn-sm">
+              <svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-user"/></svg>
+              <span>Sign In</span>
+            </button>
+            <button id="topbar-user-btn" class="btn btn-glass btn-sm is-hidden" title="Edit SQL Account &amp; Username">
+              <span id="topbar-user-name">@user</span>
+              <span id="topbar-user-role" class="role-pill is-user">USER</span>
+            </button>
+
+            <button id="theme-toggle-btn" class="icon-btn theme-toggle" aria-label="Toggle dark / light theme" aria-pressed="false" title="Toggle theme">
+              <svg class="ico-lg ico-stroke sun" stroke-width="1.8"><use href="#i-sun"/></svg>
+              <svg class="ico-lg ico-stroke moon" stroke-width="1.8"><use href="#i-moon"/></svg>
+            </button>
+
+            <div id="notif-wrap" class="pos-rel">
+              <button id="notif-btn" class="icon-btn" aria-label="Notifications" aria-haspopup="true">
+                <svg class="ico-lg ico-stroke" stroke-width="1.8"><use href="#i-bell"/></svg>
+                <span id="notif-dot" class="notif-dot pulse"></span>
+              </button>
+              <div id="notif-dropdown" class="dropdown dropdown--notif glass-panel is-hidden">
+                <div class="dropdown__head">
+                  <div class="row" style="--gap:8px"><h3>New Episodes</h3><span id="notif-count-pill" class="badge">3 NEW</span></div>
+                  <button id="mark-read-btn" class="btn btn-text">Mark all read</button>
+                </div>
+                <div id="notif-list" class="notif-list"></div>
+              </div>
+            </div>
+
+            <span class="topbar__sep"></span>
+
+            <button id="cast-btn" class="icon-btn hide-mobile" title="Cast to TV" aria-label="Cast to device">
+              <svg class="ico-lg ico-stroke" stroke-width="1.8"><use href="#i-cast"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Search results -->
+        <section id="search-results-section" class="stack is-hidden">
+          <div class="search-head">
+            <div class="row"><h2>Search Results</h2><span id="search-count-badge" class="search-count"></span></div>
+            <button id="exit-search-btn" class="btn btn-text is-danger">Clear Search</button>
+          </div>
+          <div id="search-results-grid" class="grid-cards"></div>
+        </section>
+
+        <!-- Category (Movies / Series / Anime / My List / Downloads) -->
+        <section id="category-view-section" class="stack is-hidden">
+          <div class="category-head" data-cms-edit="brand">
+            <div class="category-head__lead">
+              <span class="accent-bar"></span>
+              <div>
+                <h2 id="category-title" class="page-title">Movies</h2>
+                <p id="category-subtitle" class="page-sub"></p>
+              </div>
+            </div>
+            <div id="category-filter-pills" class="row"></div>
+          </div>
+          <div id="category-grid" class="grid-cards"></div>
+        </section>
+
+        <!-- Home -->
+        <div id="home-view-section" class="stack stack-lg">
+
+          <section id="hero-banner" class="hero" data-cms-edit="hero" aria-roledescription="carousel" aria-label="Featured titles">
+            <div class="hero__bg"><img id="hero-bg-img" class="hero__img" data-unified-img alt="Featured anime banner" /></div>
+            <div class="hero__scrim-x"></div>
+            <div class="hero__scrim-y"></div>
+            <div class="hero__rim"></div>
+
+            <div class="hero__body">
+              <div class="hero__copy">
+                <div id="hero-badge" class="hero__badge"><span class="dot pulse"></span><span id="hero-badge-text">Trending Now</span></div>
+                <h1 id="hero-headline" class="hero__title"><span>Naruto</span> <span class="accent">Shippuden</span></h1>
+                <p id="hero-tagline" class="hero__tagline">The journey continues... with greater battles, deeper bonds, and a stronger resolve.</p>
+                <div id="hero-meta" class="hero__meta"></div>
+                <div class="hero__actions">
+                  <button id="hero-watch-btn" class="btn btn-crimson btn-lg">
+                    <svg class="ico-sm ico-fill"><use href="#i-play-round"/></svg><span>Watch Now</span>
+                  </button>
+                  <button id="hero-mylist-btn" class="btn btn-media btn-lg">
+                    <span id="hero-mylist-icon" class="row"></span><span id="hero-mylist-label">My List</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="hero__foot">
+                <div id="hero-pagination" class="hero__pager" role="tablist" aria-label="Featured slides"></div>
+                <div class="hero__arrows">
+                  <button id="hero-prev-btn" class="btn btn-media round-btn" aria-label="Previous slide"><svg class="ico-sm ico-stroke" stroke-width="2.2"><use href="#i-chev-left"/></svg></button>
+                  <button id="hero-next-btn" class="btn btn-media round-btn" aria-label="Next slide"><svg class="ico-sm ico-stroke" stroke-width="2.2"><use href="#i-chev-right"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="home-continue-section" class="stack">
+            <div class="section-head">
+              <div class="section-head__lead" data-cms-edit="brand">
+                <h2 id="continue-section-title" class="section-title">Continue Watching</h2>
+                <div class="section-line"></div>
+              </div>
+              <button data-see-all="series" class="see-all"><span>See All</span><svg class="ico-sm ico-stroke" stroke-width="2.2"><use href="#i-arrow-right"/></svg></button>
+            </div>
+            <div id="continue-watching-grid" class="grid-cards snap-row"></div>
+          </section>
+
+          <section id="home-popular-section" class="stack">
+            <div class="section-head">
+              <div class="section-head__lead" data-cms-edit="brand">
+                <h2 id="popular-section-title" class="section-title">Popular Movies</h2>
+                <div class="section-line"></div>
+              </div>
+              <button data-see-all="movies" class="see-all"><span>See All</span><svg class="ico-sm ico-stroke" stroke-width="2.2"><use href="#i-arrow-right"/></svg></button>
+            </div>
+            <div id="popular-movies-grid" class="grid-cards snap-row"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ===== VIEW 2: PLAYER ===== -->
+      <div id="player-view" class="view stack is-hidden" style="--gap:20px">
+
+        <header class="cinebar glass-panel">
+          <div class="cinebar__left">
+            <button id="back-to-dashboard-btn" class="btn btn-glass btn-sm">
+              <svg class="ico-sm ico-stroke" stroke-width="2.2" style="color:var(--accent)"><use href="#i-arrow-left"/></svg>
+              <span class="cinebar__label-long">Back to Dashboard</span><span class="cinebar__label-short">Back</span>
+            </button>
+            <h1 id="player-header-title" class="cinebar__title truncate">Naruto Shippuden</h1>
+            <span id="player-header-ep-badge" class="badge">S1 E1</span>
+          </div>
+
+          <div class="cinebar__right">
+            <button id="open-studio-btn-player" data-open-studio="player" class="btn btn-crimson btn-sm admin-only is-hidden" title="Edit Player &amp; Subtitles in Studio">
+              <svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-edit"/></svg>
+              <span class="hide-mobile">Studio</span>
+            </button>
+            <button id="theme-toggle-btn-player" class="icon-btn theme-toggle" aria-label="Toggle dark / light theme" aria-pressed="false">
+              <svg class="ico-lg ico-stroke sun" stroke-width="1.8"><use href="#i-sun"/></svg>
+              <svg class="ico-lg ico-stroke moon" stroke-width="1.8"><use href="#i-moon"/></svg>
+            </button>
+            <button id="ambient-toggle-btn" class="btn btn-glass btn-sm" title="Toggle ambient aura" aria-label="Toggle ambient glow">
+              <span id="ambient-indicator-dot" class="dot"></span><span class="hide-mobile">Ambient Glow</span>
+            </button>
+            <button id="player-download-btn" class="btn btn-glass btn-sm" title="Save offline" aria-label="Save offline">
+              <svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-download"/></svg><span class="hide-mobile">Save</span>
+            </button>
+            <button id="player-mylist-btn" class="btn btn-glass btn-sm">
+              <span id="player-mylist-icon" class="row"></span><span id="player-mylist-label" class="hide-xs">My List</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="player-grid">
+          <div class="player-main">
+
+            <div class="player-frame">
+              <div id="ambient-glow-halo" class="ambient-halo" aria-hidden="true"></div>
+
+              <div id="player-stage" class="player-stage">
+                <canvas id="player-canvas" role="img" aria-label="Video player"></canvas>
+
+                <div id="center-play-feedback" class="center-feedback">
+                  <div class="center-feedback__orb"><svg id="center-feedback-icon" class="ico-fill" style="width:32px;height:32px;color:#fff"><use href="#i-play"/></svg></div>
+                </div>
+
+                <div id="seek-left-ripple" class="seek-ripple seek-ripple--left is-hidden"><div class="seek-ripple__orb">-10s</div></div>
+                <div id="seek-right-ripple" class="seek-ripple seek-ripple--right is-hidden"><div class="seek-ripple__orb">+10s</div></div>
+
+                <div id="player-buffer-overlay" class="buffer-overlay is-hidden"><div class="spinner"></div></div>
+
+                <button id="skip-intro-btn" class="skip-intro video-panel" tabindex="-1">
+                  <span>Skip Intro</span><svg class="ico-sm ico-stroke" stroke-width="2.4"><use href="#i-skip"/></svg>
+                </button>
+
+                <div id="autonext-overlay" class="autonext video-panel is-hidden">
+                  <div class="autonext__row">
+                    <span class="autonext__label">Up Next in <span id="autonext-sec">5</span>s</span>
+                    <button id="cancel-autonext-btn" class="autonext__cancel">Cancel</button>
+                  </div>
+                  <p id="autonext-title" class="autonext__title truncate">Episode 2</p>
+                  <button id="play-next-now-btn" class="btn btn-crimson btn-sm btn-block">Play Next Now</button>
+                </div>
+
+                <div id="player-click-surface" class="player-hit"></div>
+
+                <div id="player-controls" class="controls">
+                  <div id="scrubber-container" class="scrubber" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div id="scrubber-tooltip" class="scrubber__tip is-hidden">00:00</div>
+                    <div class="scrubber__track">
+                      <div id="scrubber-buffered" class="scrubber__buffered"></div>
+                      <div id="scrubber-intro" class="scrubber__intro"></div>
+                      <div id="scrubber-fill" class="scrubber__fill"></div>
+                    </div>
+                    <div id="scrubber-thumb" class="scrubber__thumb"></div>
+                  </div>
+
+                  <div class="controls__row">
+                    <div class="controls__group">
+                      <button id="ctrl-play-btn" class="ctl-btn is-primary" aria-label="Play or pause">
+                        <svg id="ctrl-play-icon" class="ico ico-fill"><use href="#i-pause"/></svg>
+                      </button>
+                      <button id="ctrl-rw-btn" class="ctl-btn hide-xs" title="Rewind 10s (←)" aria-label="Rewind 10 seconds"><svg class="ico ico-stroke" stroke-width="1.9"><use href="#i-rewind"/></svg></button>
+                      <button id="ctrl-fw-btn" class="ctl-btn hide-xs" title="Forward 10s (→)" aria-label="Forward 10 seconds"><svg class="ico ico-stroke" stroke-width="1.9"><use href="#i-forward"/></svg></button>
+                      <div class="volume hide-xs">
+                        <button id="ctrl-mute-btn" class="ctl-btn" title="Mute (M)" aria-label="Mute"><svg id="ctrl-vol-icon" class="ico ico-stroke" stroke-width="1.9"><use href="#i-volume"/></svg></button>
+                        <input id="ctrl-vol-slider" class="slider" type="range" min="0" max="100" value="85" aria-label="Volume" />
+                      </div>
+                      <div class="ctl-time tabular"><b id="ctrl-time-current">00:00</b> / <span id="ctrl-time-total">24:00</span></div>
+                    </div>
+
+                    <div class="controls__group">
+                      <button id="ctrl-next-ep-btn" class="ctl-btn hide-xs" title="Next episode" aria-label="Next episode"><span class="ctl-text" style="margin-right:4px">Next</span><svg class="ico-sm ico-fill"><use href="#i-next"/></svg></button>
+                      <button id="ctrl-subdub-btn" class="ctl-btn ctl-pill ctl-text" title="Toggle subtitles / dub">SUB</button>
+                      <div class="popover-wrap">
+                        <button id="ctrl-speed-btn" class="ctl-btn ctl-text" title="Playback speed" aria-label="Playback speed">1x</button>
+                        <div id="speed-popover" class="popover video-panel is-hidden"></div>
+                      </div>
+                      <div class="popover-wrap">
+                        <button id="ctrl-quality-btn" class="ctl-btn ctl-pill is-accent ctl-text" title="Stream quality" aria-label="Stream quality">1080p</button>
+                        <div id="quality-popover" class="popover video-panel is-hidden"></div>
+                      </div>
+                      <button id="ctrl-fs-btn" class="ctl-btn" title="Fullscreen (F)" aria-label="Fullscreen"><svg class="ico ico-stroke" stroke-width="1.9"><use href="#i-fullscreen"/></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="player-info glass-panel">
+              <div class="player-info__top">
+                <div>
+                  <div class="player-info__label">
+                    <span id="info-ep-label" class="eyebrow">Season 1 • Episode 1</span>
+                    <span class="sep-dot">•</span><span id="info-match" class="match">98% Match</span>
+                    <span class="sep-dot">•</span><span id="info-year" style="color:var(--text-muted)">2024</span>
+                    <span class="tag">HD 60FPS</span>
+                  </div>
+                  <h2 id="info-ep-title">Homecoming</h2>
+                </div>
+                <div id="info-genres" class="row row-wrap" style="--gap:8px"></div>
+              </div>
+              <p id="info-synopsis" class="synopsis"></p>
+              <div class="shortcuts">
+                <b style="color:var(--text-2)">Shortcuts:</b>
+                <span><kbd>Space</kbd> Play/Pause</span>
+                <span><kbd>←</kbd> <kbd>→</kbd> Seek 10s</span>
+                <span><kbd>M</kbd> Mute</span>
+                <span><kbd>F</kbd> Fullscreen</span>
+                <span><kbd>Esc</kbd> Back</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="episodes glass-panel" aria-label="Episodes">
+            <div class="episodes__head">
+              <div><h3>Episodes</h3><p id="ep-panel-count">5 episodes available</p></div>
+              <select id="season-select" class="select" aria-label="Season"><option value="1">Season 1</option></select>
+            </div>
+            <div class="row-toggle">
+              <span class="label"><span class="dot"></span>Auto-Next Episode</span>
+              <button id="autonext-toggle" class="switch" role="switch" aria-checked="true" aria-label="Auto-next episode"><span class="switch__knob"></span></button>
+            </div>
+            <div id="episode-list" class="episode-list"></div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ===== EDITABLE SITE FOOTER ===== -->
+      <footer id="site-footer" class="site-footer glass-panel" data-cms-edit="footer" aria-label="Site footer">
+        <div class="site-footer__grid">
+          <div class="site-footer__brand">
+            <div class="site-footer__logo-row">
+              <svg class="site-footer__logo-svg" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <defs>
+                  <filter id="footerLogoGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2.5" result="blur" />
+                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                </defs>
+                <path id="footer-logo-path" d="M9.5 9.4C9.5 7.6 11.45 6.48 13 7.38L31.3 17.98C32.85 18.88 32.85 21.12 31.3 22.02L13 32.62C11.45 33.52 9.5 32.4 9.5 30.6V9.4Z" stroke="#ff1e38" stroke-width="3.6" stroke-linejoin="round" filter="url(#footerLogoGlow)" />
+              </svg>
+              <div>
+                <div id="footer-brand-name" class="site-footer__name">CRIMSON</div>
+                <div id="footer-tagline" class="site-footer__tagline">Curated anime streaming experience in 4K HDR.</div>
+              </div>
+            </div>
+            <p id="footer-content" class="site-footer__desc">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+
+          <div class="site-footer__col">
+            <h4 id="footer-col1-title" class="site-footer__col-title">Browse</h4>
+            <ul id="footer-col1-links" class="site-footer__links"></ul>
+          </div>
+
+          <div class="site-footer__col">
+            <h4 id="footer-col2-title" class="site-footer__col-title">Library &amp; Account</h4>
+            <ul id="footer-col2-links" class="site-footer__links"></ul>
+          </div>
+
+          <div class="site-footer__col">
+            <h4 id="footer-col3-title" class="site-footer__col-title">Legal &amp; Info</h4>
+            <ul id="footer-col3-links" class="site-footer__links"></ul>
+          </div>
+        </div>
+
+        <div class="site-footer__bottom">
+          <p id="footer-copyright" class="site-footer__copy">© 2026 CRIMSON. Lorem ipsum dolor sit amet — All rights reserved.</p>
+          <button type="button" data-open-studio="footer" class="btn btn-glass btn-sm admin-only is-hidden">
+            <svg class="ico-xs ico-stroke" stroke-width="2"><use href="#i-edit"/></svg>
+            <span>Edit Footer</span>
+          </button>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- ===== Mobile bottom tab bar ===== -->
+  <nav id="tabbar" class="tabbar glass-panel" aria-label="Quick navigation">
+    <button class="tab is-active" data-nav="home"><svg class="ico-stroke" stroke-width="1.8"><use href="#i-home"/></svg><span>Home</span></button>
+    <button class="tab" data-nav="movies"><svg class="ico-stroke" stroke-width="1.8"><use href="#i-movies"/></svg><span>Movies</span></button>
+    <button class="tab" data-nav="series"><svg class="ico-stroke" stroke-width="1.8"><use href="#i-tv"/></svg><span>Series</span></button>
+    <button class="tab" data-nav="mylist"><svg class="ico-stroke" stroke-width="1.8"><use href="#i-grid"/></svg><span>My List</span></button>
+    <button id="tabbar-menu-btn" class="tab" aria-label="More"><svg class="ico-stroke" stroke-width="1.8"><use href="#i-menu"/></svg><span>More</span></button>
+  </nav>
+
+  <!-- ===== FLOATING ADMIN DOCK (Strictly hidden unless logged in as admin) ===== -->
+  <div id="floating-studio-dock" class="studio-dock glass-panel admin-only is-hidden">
+    <button type="button" class="studio-dock__btn is-primary" data-open-studio="brand">
+      <svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-edit"/></svg>
+      <span>Website Studio</span>
+    </button>
+    <button type="button" id="dock-live-edit-btn" class="studio-dock__btn">
+      <span>Live Edit Page</span>
+    </button>
+  </div>
+
+  <!-- ===== SQL LOGIN / REGISTER / PROFILE MODAL ===== -->
+  <div id="auth-modal" class="modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="auth-modal-heading">
+    <div class="auth-modal__card glass-panel">
+      <div class="modal__head">
+        <h3 id="auth-modal-heading" class="modal__title">
+          <span class="modal__icon"><svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-user"/></svg></span>
+          <span>Sign In to CRIMSON</span>
+        </h3>
+        <button id="close-auth-btn" class="icon-btn" aria-label="Close authentication"><svg class="ico ico-stroke" stroke-width="2"><use href="#i-close"/></svg></button>
+      </div>
+
+      <div id="auth-tabs-bar" class="auth-tabs">
+        <button type="button" class="auth-tab is-active" data-auth-tab="login">Sign In</button>
+        <button type="button" class="auth-tab" data-auth-tab="register">Create Account</button>
+      </div>
+
+      <div id="auth-error-box" class="auth-error is-hidden"></div>
+
+      <form id="auth-form" class="stack" style="--gap:14px">
+        <div class="form-field">
+          <label class="form-label" for="auth-username">
+            <span>SQL Username</span>
+            <span id="auth-username-status" class="username-status is-hidden"></span>
+          </label>
+          <input id="auth-username" class="form-input" type="text" autocomplete="username" placeholder="e.g. admin or itachi" required />
+        </div>
+
+        <div id="auth-display-field" class="form-field is-hidden">
+          <label class="form-label" for="auth-display-name"><span>Display Name</span></label>
+          <input id="auth-display-name" class="form-input" type="text" placeholder="e.g. Sasuke Uchiha" />
+        </div>
+
+        <div id="auth-plan-field" class="form-field is-hidden">
+          <label class="form-label" for="auth-plan-badge"><span>Membership Plan Badge</span></label>
+          <input id="auth-plan-badge" class="form-input" type="text" value="Premium 4K" placeholder="Premium 4K" />
+        </div>
+
+        <div id="auth-avatar-field" class="form-field is-hidden">
+          <label class="form-label" for="auth-avatar-url"><span>Custom Avatar Image URL (optional)</span></label>
+          <input id="auth-avatar-url" class="form-input" type="text" placeholder="https://... or leave blank for default" />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="auth-password"><span id="auth-password-label">Password</span></label>
+          <input id="auth-password" class="form-input" type="password" autocomplete="current-password" placeholder="••••••••" />
+        </div>
+
+        <button id="auth-submit-btn" type="submit" class="btn btn-crimson btn-lg btn-block">Sign In</button>
+        <button id="auth-signout-btn" type="button" class="btn btn-glass btn-sm btn-block is-hidden" style="color:var(--accent-text)">Sign Out of Account</button>
+      </form>
+
+      <div id="auth-demo-box" class="demo-box">
+        <span class="demo-box__title">1-Click SQL Demo Accounts</span>
+        <div class="demo-pills">
+          <button type="button" class="demo-pill" data-demo-login data-demo-user="admin" data-demo-pass="admin123">
+            <strong><span>@admin</span><span class="role-pill">ADMIN</span></strong>
+            <span>Unlocks Website Studio</span>
+          </button>
+          <button type="button" class="demo-pill" data-demo-login data-demo-user="itachi" data-demo-pass="crimson123">
+            <strong><span>@itachi</span><span class="role-pill is-user">USER</span></strong>
+            <span>Standard Viewer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FULL 7-TAB VISUAL WEBSITE EDITOR STUDIO MODAL (Strictly Admin Only) ===== -->
+  <div id="studio-modal" class="studio-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="studio-heading">
+    <div class="studio-shell glass-panel">
+      <div class="studio-head">
+        <div class="studio-head__title">
+          <span class="modal__icon"><svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-edit"/></svg></span>
+          <div>
+            <div id="studio-heading">Visual Website Studio &amp; SQL Control Center</div>
+            <div style="font-size:11px;font-weight:500;color:var(--text-muted)">Edit branding, theme tokens, catalog, episodes, subtitles, notifications &amp; SQL users</div>
+          </div>
+        </div>
+        <button id="close-studio-btn" class="icon-btn" aria-label="Close Studio"><svg class="ico ico-stroke" stroke-width="2"><use href="#i-close"/></svg></button>
+      </div>
+
+      <div class="studio-body">
+        <!-- Left Studio Navigation -->
+        <nav class="studio-nav" aria-label="Studio sections">
+          <button type="button" class="studio-nav__btn is-active" data-studio-tab="brand">1. Brand &amp; Layout</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="theme">2. Theme &amp; Colors</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="catalog">3. Catalog (Anime/Movies)</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="episodes">4. Seasons &amp; Episodes</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="player">5. Player &amp; Subtitles</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="notifications">6. Notifications</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="users">7. SQL Users &amp; Backup</button>
+          <button type="button" class="studio-nav__btn" data-studio-tab="footer">8. Footer &amp; Content</button>
+        </nav>
+
+        <!-- Right Studio Content Panes -->
+        <div class="studio-content">
+
+          <!-- PANE 1: BRAND, NAVIGATION & SECTIONS -->
+          <div class="studio-pane" data-studio-pane="brand">
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">Brand Identity &amp; Global Header</h4>
+                  <p class="studio-card__sub">Customize brand name, page title, logo color, announcement bar, and login gate</p>
+                </div>
+                <button type="button" id="cms-save-brand-btn" class="btn btn-crimson btn-sm">Save Brand &amp; Layout to SQL</button>
+              </div>
+
+              <div class="studio-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="cms-brand-name">Brand Name</label>
+                  <input id="cms-brand-name" class="form-input" type="text" placeholder="CRIMSON" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-page-title">Browser Tab Title</label>
+                  <input id="cms-page-title" class="form-input" type="text" placeholder="CRIMSON — Anime Streaming" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-logo-color-hex">Logo Triangle Color</label>
+                  <div class="color-picker-row">
+                    <input id="cms-logo-color" class="color-swatch" type="color" value="#ff1e38" />
+                    <input id="cms-logo-color-hex" class="form-input" type="text" value="#ff1e38" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-search-placeholder">Search Bar Placeholder</label>
+                  <input id="cms-search-placeholder" class="form-input" type="text" placeholder="Search movies, series..." />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="cms-announcement">Top Announcement Banner (leave empty to hide)</label>
+                <input id="cms-announcement" class="form-input" type="text" placeholder="e.g. 🔥 Simulcast Finale of Demon Slayer airing tonight at 9 PM!" />
+              </div>
+
+              <label class="row" style="--gap:10px;font-size:13px;font-weight:600;cursor:pointer">
+                <input id="cms-login-gate" type="checkbox" class="checkbox" />
+                <span>Require SQL Login Gate before visitors can browse the dashboard</span>
+              </label>
+            </div>
+
+            <div class="studio-card">
+              <div>
+                <h4 class="studio-card__title">Sidebar &amp; Mobile Tabbar Navigation</h4>
+                <p class="studio-card__sub">Rename any navigation tab or toggle its visibility on/off</p>
+              </div>
+              <div id="cms-nav-items-list" class="cms-list"></div>
+            </div>
+
+            <div class="studio-card">
+              <div>
+                <h4 class="studio-card__title">Homepage Sections, Order &amp; Visibility</h4>
+                <p class="studio-card__sub">Rename section headings, change homepage block order, or hide/show UI features</p>
+              </div>
+
+              <div class="studio-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-continue-title">Continue Watching Heading</label>
+                  <input id="cms-sec-continue-title" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-popular-title">Popular Movies Heading</label>
+                  <input id="cms-sec-popular-title" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-movies-head">Movies Tab Heading</label>
+                  <input id="cms-sec-movies-head" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-movies-sub">Movies Tab Subtitle</label>
+                  <input id="cms-sec-movies-sub" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-series-head">Series Tab Heading</label>
+                  <input id="cms-sec-series-head" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-series-sub">Series Tab Subtitle</label>
+                  <input id="cms-sec-series-sub" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-anime-head">Anime Tab Heading</label>
+                  <input id="cms-sec-anime-head" class="form-input" type="text" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-sec-anime-sub">Anime Tab Subtitle</label>
+                  <input id="cms-sec-anime-sub" class="form-input" type="text" />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="cms-sec-order">Homepage Section Order</label>
+                <select id="cms-sec-order" class="select">
+                  <option value="hero,continue,popular">1. Hero Banner → 2. Continue Watching → 3. Popular Movies</option>
+                  <option value="hero,popular,continue">1. Hero Banner → 2. Popular Movies → 3. Continue Watching</option>
+                  <option value="continue,hero,popular">1. Continue Watching → 2. Hero Banner → 3. Popular Movies</option>
+                  <option value="popular,continue,hero">1. Popular Movies → 2. Continue Watching → 3. Hero Banner</option>
+                </select>
+              </div>
+
+              <div class="studio-grid-3">
+                <label class="row" style="--gap:8px;font-size:12px;font-weight:600;cursor:pointer"><input id="cms-show-hero" type="checkbox" class="checkbox" /><span>Show Hero Banner</span></label>
+                <label class="row" style="--gap:8px;font-size:12px;font-weight:600;cursor:pointer"><input id="cms-show-continue" type="checkbox" class="checkbox" /><span>Show Continue Watching</span></label>
+                <label class="row" style="--gap:8px;font-size:12px;font-weight:600;cursor:pointer"><input id="cms-show-popular" type="checkbox" class="checkbox" /><span>Show Popular Movies</span></label>
+                <label class="row" style="--gap:8px;font-size:12px;font-weight:600;cursor:pointer"><input id="cms-show-notifs" type="checkbox" class="checkbox" /><span>Show Notification Bell</span></label>
+                <label class="row" style="--gap:8px;font-size:12px;font-weight:600;cursor:pointer"><input id="cms-show-cast" type="checkbox" class="checkbox" /><span>Show Cast Button</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 2: THEME & DESIGN TOKENS -->
+          <div class="studio-pane is-hidden" data-studio-pane="theme">
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">Live Color Palette &amp; Theme Tokens</h4>
+                  <p class="studio-card__sub">Changes preview live across the entire website as you pick colors or drag sliders</p>
+                </div>
+                <div class="row" style="--gap:8px">
+                  <button type="button" id="cms-reset-theme-btn" class="btn btn-glass btn-sm">Reset Default</button>
+                  <button type="button" id="cms-save-theme-btn" class="btn btn-crimson btn-sm">Save Theme to SQL</button>
+                </div>
+              </div>
+
+              <div class="studio-grid-3">
+                <div class="form-field">
+                  <label class="form-label">Primary Accent (--crimson)</label>
+                  <div class="color-picker-row">
+                    <input id="cms-color-crimson" class="color-swatch" type="color" value="#e50914" />
+                    <input id="cms-hex-crimson" class="form-input" type="text" value="#e50914" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label">Bright Accent (--crimson-bright)</label>
+                  <div class="color-picker-row">
+                    <input id="cms-color-crimsonBright" class="color-swatch" type="color" value="#ff1e38" />
+                    <input id="cms-hex-crimsonBright" class="form-input" type="text" value="#ff1e38" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label">Dark Mode Background</label>
+                  <div class="color-picker-row">
+                    <input id="cms-color-darkBg" class="color-swatch" type="color" value="#0a0a0e" />
+                    <input id="cms-hex-darkBg" class="form-input" type="text" value="#0a0a0e" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label">Dark Mode Card Surface</label>
+                  <div class="color-picker-row">
+                    <input id="cms-color-darkCardBg" class="color-swatch" type="color" value="#121218" />
+                    <input id="cms-hex-darkCardBg" class="form-input" type="text" value="#121218" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label">Light Mode Background</label>
+                  <div class="color-picker-row">
+                    <input id="cms-color-lightBg" class="color-swatch" type="color" value="#f4f3f7" />
+                    <input id="cms-hex-lightBg" class="form-input" type="text" value="#f4f3f7" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label">Light Mode Card Surface</label>
+                  <div class="color-picker-row">
+                    <input id="cms-color-lightCardBg" class="color-swatch" type="color" value="#ffffff" />
+                    <input id="cms-hex-lightCardBg" class="form-input" type="text" value="#ffffff" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="studio-card">
+              <div>
+                <h4 class="studio-card__title">Geometry, Glass Blur &amp; Grid Sizing</h4>
+                <p class="studio-card__sub">Fine-tune border radius, backdrop blur, hero height, and card grid density</p>
+              </div>
+
+              <div class="studio-grid-2">
+                <div class="form-field">
+                  <label class="form-label"><span>Card Corner Radius</span><b id="cms-val-radiusMd">14px</b></label>
+                  <input id="cms-slider-radiusMd" type="range" min="0" max="28" value="14" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label"><span>Panel Corner Radius</span><b id="cms-val-radiusLg">18px</b></label>
+                  <input id="cms-slider-radiusLg" type="range" min="0" max="32" value="18" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label"><span>Glass Blur Strength</span><b id="cms-val-blur">18px</b></label>
+                  <input id="cms-slider-blur" type="range" min="0" max="30" value="18" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label"><span>Hero Banner Height (Desktop)</span><b id="cms-val-heroMinHeight">430px</b></label>
+                  <input id="cms-slider-heroMinHeight" type="range" min="320" max="580" step="10" value="430" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label"><span>Card Grid Min-Width</span><b id="cms-val-cardMinWidth">232px</b></label>
+                  <input id="cms-slider-cardMinWidth" type="range" min="180" max="320" step="8" value="232" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 3: CATALOG MANAGER (ANIME & MOVIES CRUD) -->
+          <div class="studio-pane is-hidden" data-studio-pane="catalog">
+            <div id="cms-title-form-card" class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 id="cms-title-form-heading" class="studio-card__title">Add New Anime / Movie to SQL</h4>
+                  <p class="studio-card__sub">Create a new title or click "Edit" on any existing title below</p>
+                </div>
+                <button type="button" id="cms-title-reset-btn" class="btn btn-glass btn-sm">+ New Blank Form</button>
+              </div>
+
+              <form id="cms-title-form" class="stack" style="--gap:12px">
+                <div class="studio-grid-3">
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-title">Full Title *</label>
+                    <input id="cms-t-title" class="form-input" type="text" placeholder="Solo Leveling" required />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-white">Hero Title (Part 1 White)</label>
+                    <input id="cms-t-white" class="form-input" type="text" placeholder="Solo" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-crimson">Hero Title (Part 2 Accent)</label>
+                    <input id="cms-t-crimson" class="form-input" type="text" placeholder="Leveling" />
+                  </div>
+                </div>
+
+                <div class="studio-grid-3">
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-id">Slug ID (auto if blank)</label>
+                    <input id="cms-t-id" class="form-input" type="text" placeholder="solo-leveling" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-type">Type</label>
+                    <select id="cms-t-type" class="select">
+                      <option value="anime">Anime Series</option>
+                      <option value="movie">Theatrical Movie</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-category">Nav Category</label>
+                    <select id="cms-t-category" class="select">
+                      <option value="series">Series</option>
+                      <option value="movies">Movies</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="studio-grid-3">
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-year">Release Year</label>
+                    <input id="cms-t-year" class="form-input" type="number" value="2025" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-rating">Star Rating</label>
+                    <input id="cms-t-rating" class="form-input" type="text" value="9.2" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-match">Match Badge</label>
+                    <input id="cms-t-match" class="form-input" type="text" value="98% Match" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-maturity">Maturity Rating</label>
+                    <input id="cms-t-maturity" class="form-input" type="text" value="TV-14" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-duration">Duration / Seasons Label</label>
+                    <input id="cms-t-duration" class="form-input" type="text" placeholder="2h 04m or leave blank" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-badge">Hero Pill Badge</label>
+                    <input id="cms-t-badge" class="form-input" type="text" value="Trending Now" />
+                  </div>
+                </div>
+
+                <div class="studio-grid-2">
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-genres">Genres (comma-separated)</label>
+                    <input id="cms-t-genres" class="form-input" type="text" placeholder="Action, Dark Fantasy, Supernatural" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-tagline">Hero Carousel Tagline</label>
+                    <input id="cms-t-tagline" class="form-input" type="text" placeholder="Short hook for the hero banner..." />
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="cms-t-synopsis">Synopsis</label>
+                  <textarea id="cms-t-synopsis" class="form-textarea" placeholder="Full story description..."></textarea>
+                </div>
+
+                <div class="studio-grid-2">
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-artwork">Custom Artwork URL / Data URI (blank = default SVG)</label>
+                    <input id="cms-t-artwork" class="form-input" type="text" placeholder="https://... or upload an image file →" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="cms-t-artwork-file">Or Upload Local Image File</label>
+                    <input id="cms-t-artwork-file" class="form-input" type="file" accept="image/*" style="padding-top:8px" />
+                  </div>
+                </div>
+
+                <div class="row row-wrap" style="--gap:18px;justify-content:space-between">
+                  <div class="row" style="--gap:16px">
+                    <label class="row" style="--gap:8px;font-size:12px;font-weight:700;cursor:pointer">
+                      <input id="cms-t-featured" type="checkbox" class="checkbox" />
+                      <span>★ Feature in Hero Banner Carousel</span>
+                    </label>
+                    <label class="row" style="--gap:8px;font-size:12px;font-weight:700;cursor:pointer">
+                      <input id="cms-t-popular" type="checkbox" class="checkbox" />
+                      <span>🔥 Show in Popular Movies Row</span>
+                    </label>
+                  </div>
+                  <button id="cms-title-submit-btn" type="submit" class="btn btn-crimson">Create Title in SQL</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">All SQL Catalog Titles</h4>
+                  <p class="studio-card__sub">Toggle Hero/Popular pins, reorder with ↑/↓, edit metadata, or jump to Episodes</p>
+                </div>
+                <input id="cms-catalog-filter" class="form-input" type="search" placeholder="Filter catalog..." style="max-width:220px" />
+              </div>
+              <div id="cms-catalog-list" class="cms-list"></div>
+            </div>
+          </div>
+
+          <!-- PANE 4: SEASONS & EPISODES MANAGER -->
+          <div class="studio-pane is-hidden" data-studio-pane="episodes">
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div class="row row-wrap" style="--gap:12px">
+                  <label for="cms-ep-title-select" style="font-size:13px;font-weight:700">Title:</label>
+                  <select id="cms-ep-title-select" class="select" style="min-width:220px"></select>
+                  <button type="button" id="cms-add-season-btn" class="btn btn-glass btn-sm">+ Add Season</button>
+                  <button type="button" id="cms-del-season-btn" class="btn btn-glass btn-sm">Delete Season</button>
+                </div>
+                <button type="button" id="cms-save-episodes-btn" class="btn btn-crimson btn-sm">Save All Seasons &amp; Episodes to SQL</button>
+              </div>
+
+              <div id="cms-season-pills" class="row row-wrap" style="--gap:8px"></div>
+
+              <div style="overflow-x:auto">
+                <table class="cms-table">
+                  <thead>
+                    <tr>
+                      <th>Ep #</th>
+                      <th>Code</th>
+                      <th>Episode Title</th>
+                      <th>Duration (s)</th>
+                      <th>Synopsis</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="cms-episodes-tbody"></tbody>
+                </table>
+              </div>
+
+              <div>
+                <button type="button" id="cms-add-episode-btn" class="btn btn-glass btn-sm">+ Add Episode to Season</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 5: PLAYER & SUBTITLES TIMELINE EDITOR -->
+          <div class="studio-pane is-hidden" data-studio-pane="player">
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">Video Player &amp; Timed Subtitle / Dub Script</h4>
+                  <p class="studio-card__sub">Configure the Skip Intro window and edit the timed SUB &amp; DUB lines drawn on the player canvas</p>
+                </div>
+                <button type="button" id="cms-save-player-btn" class="btn btn-crimson btn-sm">Save Player &amp; Subtitles to SQL</button>
+              </div>
+
+              <div class="studio-grid-3">
+                <div class="form-field">
+                  <label class="form-label" for="cms-p-intro-start">Intro Start (sec)</label>
+                  <input id="cms-p-intro-start" class="form-input" type="number" min="0" value="15" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-p-intro-end">Intro End (sec)</label>
+                  <input id="cms-p-intro-end" class="form-input" type="number" min="1" value="90" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-p-intro-skip">Skip Intro Jumps To (sec)</label>
+                  <input id="cms-p-intro-skip" class="form-input" type="number" min="1" value="92" />
+                </div>
+              </div>
+
+              <div style="overflow-x:auto">
+                <table class="cms-table">
+                  <thead>
+                    <tr>
+                      <th>Start (s)</th>
+                      <th>End (s)</th>
+                      <th>Japanese (SUB) Text</th>
+                      <th>English (DUB) Caption</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="cms-subtitles-tbody"></tbody>
+                </table>
+              </div>
+
+              <div>
+                <button type="button" id="cms-add-subtitle-btn" class="btn btn-glass btn-sm">+ Add Timed Subtitle Line</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 6: NOTIFICATIONS EDITOR -->
+          <div class="studio-pane is-hidden" data-studio-pane="notifications">
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">Topbar Notification Bell Alerts</h4>
+                  <p class="studio-card__sub">Manage the episode alerts displayed when users click the notification bell</p>
+                </div>
+                <div class="row" style="--gap:8px">
+                  <button type="button" id="cms-add-notif-btn" class="btn btn-glass btn-sm">+ Add Alert</button>
+                  <button type="button" id="cms-save-notifs-btn" class="btn btn-crimson btn-sm">Save Notifications to SQL</button>
+                </div>
+              </div>
+
+              <div style="overflow-x:auto">
+                <table class="cms-table">
+                  <thead>
+                    <tr>
+                      <th>Heading</th>
+                      <th>Message Text</th>
+                      <th>Time Label</th>
+                      <th>Opens Title</th>
+                      <th>Season</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="cms-notifs-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 7: SQL USERS DIRECTORY & SITE BACKUP -->
+          <div class="studio-pane is-hidden" data-studio-pane="users">
+            <div class="studio-card">
+              <div>
+                <h4 class="studio-card__title">Create New SQL User Account</h4>
+                <p class="studio-card__sub">Add a user or admin directly into the SQLite <code>users</code> table</p>
+              </div>
+
+              <form id="cms-create-user-form" class="studio-grid-3" style="align-items:end">
+                <div class="form-field">
+                  <label class="form-label" for="cms-new-u-name">Username *</label>
+                  <input id="cms-new-u-name" class="form-input" type="text" placeholder="kakashi" required />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-new-u-display">Display Name</label>
+                  <input id="cms-new-u-display" class="form-input" type="text" placeholder="Kakashi H." />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-new-u-pass">Password *</label>
+                  <input id="cms-new-u-pass" class="form-input" type="password" placeholder="••••••" required />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-new-u-role">Role</label>
+                  <select id="cms-new-u-role" class="select">
+                    <option value="user">user (Standard Viewer)</option>
+                    <option value="admin">admin (Studio Editor)</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-new-u-plan">Plan Badge</label>
+                  <input id="cms-new-u-plan" class="form-input" type="text" value="Premium 4K" />
+                </div>
+                <button type="submit" class="btn btn-crimson">+ Add SQL User</button>
+              </form>
+            </div>
+
+            <div class="studio-card">
+              <div>
+                <h4 class="studio-card__title">Registered SQL Users Directory</h4>
+                <p class="studio-card__sub">Edit usernames, promote/demote Admin Studio privileges, reset passwords, or delete accounts</p>
+              </div>
+
+              <div style="overflow-x:auto">
+                <table class="cms-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>@Username</th>
+                      <th>Display Name</th>
+                      <th>Role</th>
+                      <th>Plan Badge</th>
+                      <th>Reset Password</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cms-users-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">Full Website Snapshot Backup &amp; Factory Reset</h4>
+                  <p class="studio-card__sub">Export the entire SQL site config + catalog to JSON, import a backup, or reset to factory defaults</p>
+                </div>
+                <div class="row row-wrap" style="--gap:10px">
+                  <button type="button" id="cms-export-btn" class="btn btn-glass btn-sm">Export Site JSON</button>
+                  <label class="btn btn-glass btn-sm" style="cursor:pointer">
+                    <span>Import Site JSON</span>
+                    <input id="cms-import-file" type="file" accept="application/json" class="is-hidden" />
+                  </label>
+                  <button type="button" id="cms-factory-reset-btn" class="btn btn-text is-danger">Factory Reset Website</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 8: FOOTER & LOREM IPSUM CONTENT EDITOR -->
+          <div class="studio-pane is-hidden" data-studio-pane="footer">
+            <div class="studio-card">
+              <div class="studio-card__head">
+                <div>
+                  <h4 class="studio-card__title">Footer Brand, Lorem Ipsum Content &amp; Links</h4>
+                  <p class="studio-card__sub">Edit the footer brand name, tagline, main paragraph text, link columns, and copyright line</p>
+                </div>
+                <div class="row" style="--gap:8px">
+                  <button type="button" id="cms-reset-lorem-btn" class="btn btn-glass btn-sm">Insert Lorem Ipsum</button>
+                  <button type="button" id="cms-save-footer-btn" class="btn btn-crimson btn-sm">Save Footer to SQL</button>
+                </div>
+              </div>
+
+              <label class="row" style="--gap:10px;font-size:13px;font-weight:600;cursor:pointer">
+                <input id="cms-footer-visible" type="checkbox" class="checkbox" checked />
+                <span>Show Footer at bottom of site</span>
+              </label>
+
+              <div class="studio-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="cms-footer-brand">Footer Brand Name (blank = mirror main Brand Name)</label>
+                  <input id="cms-footer-brand" class="form-input" type="text" placeholder="Leave blank to match Brand Name" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-footer-tagline">Footer Tagline</label>
+                  <input id="cms-footer-tagline" class="form-input" type="text" placeholder="Curated anime streaming experience in 4K HDR." />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="cms-footer-content">Footer Body Content (Lorem Ipsum / Description)</label>
+                <textarea id="cms-footer-content" class="form-textarea" style="min-height:96px" placeholder="Lorem ipsum dolor sit amet..."></textarea>
+              </div>
+
+              <div class="studio-grid-3">
+                <div class="form-field">
+                  <label class="form-label" for="cms-footer-col1-title">Column 1 Title</label>
+                  <input id="cms-footer-col1-title" class="form-input" type="text" />
+                  <label class="form-label" for="cms-footer-col1-links" style="margin-top:6px">Links (Label|target per line)</label>
+                  <textarea id="cms-footer-col1-links" class="form-textarea" placeholder="Home|home&#10;Movies|movies"></textarea>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-footer-col2-title">Column 2 Title</label>
+                  <input id="cms-footer-col2-title" class="form-input" type="text" />
+                  <label class="form-label" for="cms-footer-col2-links" style="margin-top:6px">Links (Label|target per line)</label>
+                  <textarea id="cms-footer-col2-links" class="form-textarea" placeholder="My List|mylist&#10;Settings|#settings"></textarea>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="cms-footer-col3-title">Column 3 Title</label>
+                  <input id="cms-footer-col3-title" class="form-input" type="text" />
+                  <label class="form-label" for="cms-footer-col3-links" style="margin-top:6px">Links (Label|target per line)</label>
+                  <textarea id="cms-footer-col3-links" class="form-textarea" placeholder="Terms|#lorem&#10;Website|https://..."></textarea>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="cms-footer-copy">Bottom Copyright / Note</label>
+                <input id="cms-footer-copy" class="form-input" type="text" placeholder="© 2026 CRIMSON. All rights reserved." />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Settings modal ===== -->
+  <div id="settings-modal" class="modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="modal__card glass-panel">
+      <div class="modal__head">
+        <h3 id="settings-title" class="modal__title">
+          <span class="modal__icon"><svg class="ico-sm ico-stroke" stroke-width="2"><use href="#i-settings"/></svg></span>
+          Playback &amp; UI Settings
+        </h3>
+        <button id="close-settings-btn" class="icon-btn" aria-label="Close settings"><svg class="ico ico-stroke" stroke-width="2"><use href="#i-close"/></svg></button>
+      </div>
+
+      <div>
+        <div class="setting">
+          <div><p class="setting__label">Appearance</p><p class="setting__hint">Dark, light, or follow your device</p></div>
+          <div class="segmented" role="group" aria-label="Theme">
+            <button class="segmented__btn" data-theme-mode="dark" aria-pressed="false">Dark</button>
+            <button class="segmented__btn" data-theme-mode="light" aria-pressed="false">Light</button>
+            <button class="segmented__btn" data-theme-mode="system" aria-pressed="false">Auto</button>
+          </div>
+        </div>
+        <div class="setting">
+          <div><p class="setting__label">Ambient Crimson Glow</p><p class="setting__hint">Cast a pulsing crimson aura behind the player</p></div>
+          <input id="setting-ambient" type="checkbox" class="checkbox" />
+        </div>
+        <div class="setting">
+          <div><p class="setting__label">Auto-Play Next Episode</p><p class="setting__hint">Automatically queue the next episode at end</p></div>
+          <input id="setting-autonext" type="checkbox" class="checkbox" />
+        </div>
+        <div class="setting">
+          <div><p class="setting__label">Default Language</p><p class="setting__hint">Japanese subtitles or English dub</p></div>
+          <select id="setting-audio" class="select"><option value="SUB">SUB (Japanese)</option><option value="DUB">DUB (English)</option></select>
+        </div>
+        <div class="setting">
+          <div><p class="setting__label">Default Stream Quality</p><p class="setting__hint">Preferred playback resolution</p></div>
+          <select id="setting-quality" class="select"><option value="1080p">1080p HD</option><option value="720p">720p</option><option value="480p">480p</option></select>
+        </div>
+        <div class="setting">
+          <div><p class="setting__label">Reduced Motion</p><p class="setting__hint">Minimise Ken Burns and spring animations</p></div>
+          <input id="setting-reduced-motion" type="checkbox" class="checkbox" />
+        </div>
+      </div>
+
+      <div class="modal__foot">
+        <button id="reset-progress-btn" class="btn btn-text is-danger">Reset Watch Progress</button>
+        <button id="save-settings-btn" class="btn btn-crimson btn-sm">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

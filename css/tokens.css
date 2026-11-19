@@ -1,0 +1,145 @@
+/* ==========================================================================
+   TOKENS — design variables. Dark is the default; light overrides below.
+   Theme is controlled by <html data-theme="dark|light"> (set by js/theme.js).
+   ========================================================================== */
+
+:root {
+  /* ---- Brand (identical in both themes) ---- */
+  --crimson: #e50914;
+  --crimson-bright: #ff1e38;
+  --crimson-deep: #9e060e;
+  --crimson-glow: 0 8px 24px rgba(229, 9, 20, 0.35);
+
+  /* ---- Colours that sit on top of artwork / video (always dark scrim) ---- */
+  --media-text: #ffffff;
+  --media-text-2: rgba(255, 255, 255, 0.82);
+  --media-text-muted: rgba(255, 255, 255, 0.62);
+  --media-glass: rgba(255, 255, 255, 0.09);
+  --media-glass-hover: rgba(255, 255, 255, 0.16);
+  --media-border: rgba(255, 255, 255, 0.16);
+  --media-scrim: #09090d;
+  --media-pill: rgba(0, 0, 0, 0.55);
+
+  /* ---- Type, shape, motion ---- */
+  --font: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 20px;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 0.2s;
+  --dur: 0.3s;
+  --dur-slow: 0.5s;
+
+  /* ---- Layout ---- */
+  --sidebar-w: 228px;
+  --tabbar-h: 62px;
+  --blur: 18px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  /* ---- Z layers ---- */
+  --z-content: 10;
+  --z-tabbar: 45;
+  --z-backdrop: 50;
+  --z-sidebar: 60;
+  --z-modal: 70;
+  --z-toast: 80;
+}
+
+/* -------------------------------- DARK -------------------------------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0a0a0e;
+  --text: #f4f4f8;
+  --text-2: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+
+  --accent: #ff1e38;          /* accent used as text/icon colour */
+  --accent-text: #ff5a6e;
+  --accent-soft: rgba(229, 9, 20, 0.22);
+  --accent-soft-2: rgba(229, 9, 20, 0.1);
+  --accent-border: rgba(229, 9, 20, 0.42);
+  --success: #34d399;
+
+  --surface: rgba(20, 20, 26, 0.72);
+  --surface-strong: rgba(16, 16, 22, 0.9);
+  --panel-a: rgba(22, 22, 29, 0.84);
+  --panel-b: rgba(14, 14, 19, 0.9);
+  --sidebar-a: rgba(24, 24, 31, 0.88);
+  --sidebar-b: rgba(13, 13, 18, 0.94);
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --hover: rgba(255, 255, 255, 0.07);
+  --hover-strong: rgba(255, 255, 255, 0.13);
+  --field: rgba(255, 255, 255, 0.07);
+  --kbd-bg: rgba(255, 255, 255, 0.08);
+  --card-bg: #121218;
+  --track: rgba(255, 255, 255, 0.14);
+  --scrim: rgba(0, 0, 0, 0.72);
+  --scrollbar: rgba(255, 255, 255, 0.14);
+
+  --shadow-panel: 0 18px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-pop: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 18px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(229, 9, 20, 0.22);
+  --orb-1: rgba(229, 9, 20, 0.07);
+  --orb-2: rgba(255, 30, 56, 0.05);
+  --glass-btn-bg: rgba(255, 255, 255, 0.07);
+  --glass-btn-hover: rgba(255, 255, 255, 0.13);
+}
+
+/* -------------------------------- LIGHT -------------------------------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f4f3f7;
+  --text: #17161c;
+  --text-2: #3a3844;
+  --text-muted: #5b5867;
+  --text-faint: #7d7a89;
+
+  --accent: #d1081b;          /* >= 4.5:1 on white */
+  --accent-text: #c0071a;
+  --accent-soft: rgba(209, 8, 27, 0.11);
+  --accent-soft-2: rgba(209, 8, 27, 0.06);
+  --accent-border: rgba(209, 8, 27, 0.35);
+  --success: #0b7a52;
+
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.94);
+  --panel-a: rgba(255, 255, 255, 0.92);
+  --panel-b: rgba(250, 249, 252, 0.95);
+  --sidebar-a: rgba(255, 255, 255, 0.9);
+  --sidebar-b: rgba(248, 246, 251, 0.95);
+
+  --border: rgba(23, 22, 28, 0.1);
+  --border-strong: rgba(23, 22, 28, 0.2);
+  --hover: rgba(23, 22, 28, 0.06);
+  --hover-strong: rgba(23, 22, 28, 0.1);
+  --field: rgba(23, 22, 28, 0.05);
+  --kbd-bg: rgba(23, 22, 28, 0.07);
+  --card-bg: #ffffff;
+  --track: rgba(23, 22, 28, 0.14);
+  --scrim: rgba(20, 16, 30, 0.5);
+  --scrollbar: rgba(23, 22, 28, 0.22);
+
+  --shadow-panel: 0 14px 38px rgba(40, 20, 60, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-pop: 0 18px 44px rgba(40, 20, 60, 0.2);
+  --shadow-card: 0 16px 32px rgba(40, 20, 60, 0.2), 0 0 0 1px rgba(209, 8, 27, 0.25);
+  --orb-1: rgba(229, 9, 20, 0.1);
+  --orb-2: rgba(255, 30, 56, 0.07);
+  --glass-btn-bg: rgba(23, 22, 28, 0.05);
+  --glass-btn-hover: rgba(23, 22, 28, 0.1);
+}
+
+/* Lighter blur on phones: backdrop-filter is the #1 mobile jank source. */
+@media (max-width: 767px) {
+  :root { --blur: 10px; }
+}

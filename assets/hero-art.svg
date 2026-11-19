@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070c"/>
+      <stop offset="38%" stop-color="#140914"/>
+      <stop offset="72%" stop-color="#360919"/>
+      <stop offset="100%" stop-color="#12060c"/>
+    </linearGradient>
+    <radialGradient id="moonHalo" cx="72%" cy="32%" r="42%">
+      <stop offset="0%" stop-color="#ff4d63" stop-opacity="0.92"/>
+      <stop offset="28%" stop-color="#e50914" stop-opacity="0.52"/>
+      <stop offset="62%" stop-color="#6b0514" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0a0a0e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bloodMoon" cx="44%" cy="42%" r="54%">
+      <stop offset="0%" stop-color="#ffd0d6"/>
+      <stop offset="22%" stop-color="#ff4e66"/>
+      <stop offset="68%" stop-color="#d40b24"/>
+      <stop offset="100%" stop-color="#7c0414"/>
+    </radialGradient>
+    <linearGradient id="cloakGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#17121b"/>
+      <stop offset="45%" stop-color="#0b090f"/>
+      <stop offset="100%" stop-color="#1d0911"/>
+    </linearGradient>
+    <linearGradient id="rimLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3b56" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff3b56" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softBlur"><feGaussianBlur stdDeviation="16"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+
+  <!-- Night Sky Base -->
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <rect width="1280" height="720" fill="url(#moonHalo)"/>
+
+  <!-- Atmospheric Crimson Clouds -->
+  <g opacity="0.42" filter="url(#softBlur)">
+    <ellipse cx="980" cy="140" rx="280" ry="62" fill="#9a0c24"/>
+    <ellipse cx="640" cy="220" rx="310" ry="48" fill="#5e0819"/>
+    <ellipse cx="1120" cy="310" rx="240" ry="54" fill="#c8102e"/>
+    <ellipse cx="380" cy="180" rx="260" ry="42" fill="#2a0a18"/>
+  </g>
+
+  <!-- Huge Crimson Blood Moon -->
+  <circle cx="920" cy="235" r="215" fill="#ff1e38" opacity="0.22" filter="url(#softBlur)"/>
+  <circle cx="920" cy="235" r="182" fill="url(#bloodMoon)"/>
+  <!-- Subtle Moon Crater Texture -->
+  <g fill="#750618" opacity="0.32">
+    <circle cx="855" cy="175" r="34"/>
+    <circle cx="985" cy="185" r="24"/>
+    <circle cx="945" cy="295" r="46"/>
+    <circle cx="830" cy="275" r="28"/>
+    <ellipse cx="905" cy="135" rx="44" ry="18" transform="rotate(-14 905 135)"/>
+  </g>
+
+  <!-- Distant Mountain & Mist Silhouette -->
+  <path d="M0 540 Q220 460 440 520 T880 480 T1280 510 L1280 720 L0 720 Z" fill="#130912" opacity="0.82"/>
+
+  <!-- Traditional Japanese Pagoda & Rooftops (Midground Left & Right) -->
+  <g fill="#0c0811">
+    <!-- Left Pagoda -->
+    <path d="M510 720 L510 530 L485 530 L565 485 L645 530 L620 530 L620 720 Z"/>
+    <path d="M500 500 Q565 482 630 500 L615 478 L515 478 Z"/>
+    <path d="M518 468 Q565 452 612 468 L595 445 L535 445 Z"/>
+    <path d="M535 436 Q565 422 595 436 L565 395 Z"/>
+    <rect x="563" y="366" width="4" height="34"/>
+
+    <!-- Right Grand Pagoda -->
+    <path d="M1070 720 L1070 430 L1035 430 L1140 375 L1245 430 L1210 430 L1210 720 Z"/>
+    <path d="M1050 385 Q1140 362 1230 385 L1205 352 L1075 352 Z"/>
+    <path d="M1072 342 Q1140 322 1208 342 L1185 312 L1095 312 Z"/>
+    <path d="M1094 302 Q1140 284 1186 302 L1140 250 Z"/>
+    <rect x="1138" y="216" width="4.5" height="40"/>
+
+    <!-- Lower Village Roofs -->
+    <path d="M360 720 L360 615 L445 570 L530 615 L530 720 Z"/>
+    <path d="M620 720 L620 600 L720 562 L810 605 L810 720 Z"/>
+    <path d="M1180 720 L1180 545 L1280 510 L1280 720 Z"/>
+  </g>
+
+  <!-- Warm Lantern Glow Windows -->
+  <g fill="#ff4d5a" opacity="0.72" filter="url(#glow)">
+    <rect x="556" y="546" width="14" height="20" rx="2"/>
+    <rect x="1132" y="458" width="16" height="24" rx="2"/>
+    <rect x="435" y="635" width="12" height="16" rx="2"/>
+  </g>
+
+  <!-- Iconic Dark Anime Warrior Silhouette (Right-Center) -->
+  <g transform="translate(0, 8)">
+    <!-- Crimson Rim Light Back-Outline -->
+    <path d="M892 178 C876 205 872 240 882 268 L858 298 C836 330 822 365 814 410 L725 712 L1082 712 L1035 452 C1018 370 982 325 944 298 L955 245 C968 202 938 158 892 178 Z" fill="#ff2442" opacity="0.45" filter="url(#glow)"/>
+
+    <!-- Spiky Anime Hair & Head Profile -->
+    <path d="M884 155 L858 175 L874 182 L848 205 L870 212 L862 240 L879 246 L878 274 L895 286 L902 315 L952 295 L962 248 L985 232 L968 214 L995 196 L965 186 L986 156 L952 162 L958 128 L924 148 L912 122 L898 150 L870 138 Z" fill="#09080e"/>
+    <!-- Subtle Glowing Crimson Eye Glint -->
+    <ellipse cx="892" cy="233" rx="6" ry="2.6" fill="#ff2742" transform="rotate(-8 892 233)"/>
+    <circle cx="892" cy="233" r="1.8" fill="#ffd9df"/>
+
+    <!-- High-Collared Shinobi Cloak -->
+    <path d="M844 316 L906 276 L972 290 L1006 332 L982 364 L1054 470 L1132 716 L710 716 L802 435 L828 348 Z" fill="url(#cloakGrad)"/>
+    <!-- Cloak Rim Highlight -->
+    <path d="M844 316 L906 276 L972 290" stroke="#ff3b56" stroke-width="2.6" fill="none" opacity="0.72"/>
+    <path d="M844 316 L802 435 L716 712" stroke="#ff2b47" stroke-width="2.2" fill="none" opacity="0.48"/>
+
+    <!-- Stylized Crimson Cloud Motifs on Cloak -->
+    <g fill="#7d0919" stroke="#e51a34" stroke-width="2.2" opacity="0.78">
+      <path d="M945 478 C932 478 925 492 936 502 C942 508 958 506 968 504 C984 500 998 486 986 472 C978 463 964 468 958 474 C954 469 949 478 945 478 Z"/>
+      <path d="M838 595 C824 595 818 612 831 622 C842 630 865 628 878 622 C894 615 900 594 884 584 C872 576 858 584 852 590 Z"/>
+    </g>
+  </g>
+
+  <!-- Floating Crimson Petals & Glowing Embers -->
+  <g fill="#ff2442">
+    <ellipse cx="760" cy="310" rx="9" ry="4" transform="rotate(-32 760 310)" opacity="0.85"/>
+    <ellipse cx="1045" cy="545" rx="12" ry="5" transform="rotate(24 1045 545)" opacity="0.9"/>
+    <ellipse cx="645" cy="430" rx="7" ry="3" transform="rotate(-18 645 430)" opacity="0.7"/>
+    <ellipse cx="1180" cy="420" rx="10" ry="4.5" transform="rotate(42 1180 420)" opacity="0.8"/>
+    <ellipse cx="820" cy="145" rx="6" ry="2.8" transform="rotate(-48 820 145)" opacity="0.65"/>
+    <circle cx="712" cy="240" r="2.5" opacity="0.9"/>
+    <circle cx="998" cy="390" r="3" opacity="0.85"/>
+    <circle cx="1115" cy="270" r="2.2" opacity="0.75"/>
+    <circle cx="585" cy="340" r="2" opacity="0.6"/>
+    <circle cx="480" cy="490" r="2.6" opacity="0.75"/>
+  </g>
+</svg>

@@ -1,0 +1,850 @@
+{
+  "titles": [
+    {
+      "id": "naruto-shippuden",
+      "title": "Naruto Shippuden",
+      "titleWhite": "Naruto",
+      "titleCrimson": "Shippuden",
+      "type": "anime",
+      "category": "series",
+      "featured": true,
+      "popularMovie": false,
+      "badge": "Trending Now",
+      "tagline": "The journey continues... with greater battles, deeper bonds, and a stronger resolve.",
+      "year": 2007,
+      "rating": "9.1",
+      "durationLabel": "",
+      "match": "98% Match",
+      "maturity": "TV-14",
+      "genres": [
+        "Action",
+        "Shonen",
+        "Ninja",
+        "Adventure"
+      ],
+      "synopsis": "Two and a half years after leaving Konoha to train with Jiraiya, Naruto Uzumaki returns stronger than ever as the shadowy Akatsuki organization begins hunting the Tailed Beasts under the crimson moon.",
+      "artworkUrl": "",
+      "defaultEpisode": null,
+      "sortOrder": 0,
+      "seasons": {
+        "1": [
+          {
+            "id": "naruto-s1-e1",
+            "season": 1,
+            "number": 1,
+            "code": "S1 E1",
+            "title": "Homecoming",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s1-e2",
+            "season": 1,
+            "number": 2,
+            "code": "S1 E2",
+            "title": "The Akatsuki Makes Its Move",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s1-e3",
+            "season": 1,
+            "number": 3,
+            "code": "S1 E3",
+            "title": "The Results of Training",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s1-e4",
+            "season": 1,
+            "number": 4,
+            "code": "S1 E4",
+            "title": "The Jinchuriki of the Sand",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s1-e5",
+            "season": 1,
+            "number": 5,
+            "code": "S1 E5",
+            "title": "The Kazekage Stands Tall",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s1-e6",
+            "season": 1,
+            "number": 6,
+            "code": "S1 E6",
+            "title": "Mission Cleared",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          }
+        ],
+        "2": [
+          {
+            "id": "naruto-s2-e1",
+            "season": 2,
+            "number": 1,
+            "code": "S2 E1",
+            "title": "A New Target",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s2-e2",
+            "season": 2,
+            "number": 2,
+            "code": "S2 E2",
+            "title": "Formation! New Team Kakashi",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s2-e3",
+            "season": 2,
+            "number": 3,
+            "code": "S2 E3",
+            "title": "An Unnecessary Addition",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "naruto-s2-e4",
+            "season": 2,
+            "number": 4,
+            "code": "S2 E4",
+            "title": "The Fake Smile",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "one-piece",
+      "title": "One Piece",
+      "titleWhite": "One",
+      "titleCrimson": "Piece",
+      "type": "anime",
+      "category": "series",
+      "featured": true,
+      "popularMovie": false,
+      "badge": "Top #1 Today",
+      "tagline": "Set sail across the New World where legends clash and the dawn of a new era awaits.",
+      "year": 1999,
+      "rating": "9.3",
+      "durationLabel": "",
+      "match": "99% Match",
+      "maturity": "TV-14",
+      "genres": [
+        "Adventure",
+        "Fantasy",
+        "Action"
+      ],
+      "synopsis": "Monkey D. Luffy and the Straw Hat Pirates storm Onigashima in an all-out raid against the Emperors of the Sea to liberate the Land of Wano.",
+      "artworkUrl": "",
+      "defaultEpisode": {
+        "season": 1,
+        "number": 1024,
+        "code": "S1 E1024",
+        "progress": 0.34
+      },
+      "sortOrder": 1,
+      "seasons": {
+        "1": [
+          {
+            "id": "op-s1-e1024",
+            "season": 1,
+            "number": 1024,
+            "code": "S1 E1024",
+            "title": "Oden Appears! The Confused Hearts of the Scabbards!",
+            "duration": 1440,
+            "synopsis": "A shocking figure steps from the shadows of Onigashima, leaving the Nine Red Scabbards stunned amidst the roaring battle.",
+            "videoUrl": ""
+          },
+          {
+            "id": "op-s1-e1025",
+            "season": 1,
+            "number": 1025,
+            "code": "S1 E1025",
+            "title": "The Worst Generation Wiped Out?! The Emperors' Deadly Attack!",
+            "duration": 1440,
+            "synopsis": "Kaido and Big Mom unleash a combined strike of catastrophic scale atop the Skull Dome.",
+            "videoUrl": ""
+          },
+          {
+            "id": "op-s1-e1026",
+            "season": 1,
+            "number": 1026,
+            "code": "S1 E1026",
+            "title": "The Supernovas Strike Back! The Mission to Tear Apart the Emperors",
+            "duration": 1440,
+            "synopsis": "Law, Kid, Zoro, and Luffy execute a daring strategy to separate the two Emperors.",
+            "videoUrl": ""
+          },
+          {
+            "id": "op-s1-e1027",
+            "season": 1,
+            "number": 1027,
+            "code": "S1 E1027",
+            "title": "Defend Luffy! Zoro and Law's Sword Technique!",
+            "duration": 1440,
+            "synopsis": "Pushing past every limit, Zoro unleashes Ashura against the King of the Beasts.",
+            "videoUrl": ""
+          },
+          {
+            "id": "op-s1-e1028",
+            "season": 1,
+            "number": 1028,
+            "code": "S1 E1028",
+            "title": "Surpass the Emperor of the Sea! Luffy Strikes Back with an Iron Fist",
+            "duration": 1440,
+            "synopsis": "Awakening Conqueror's Haki infusion, Luffy rises to clash sky-to-sky with Kaido.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "demon-slayer",
+      "title": "Demon Slayer",
+      "titleWhite": "Demon",
+      "titleCrimson": "Slayer",
+      "type": "anime",
+      "category": "series",
+      "featured": true,
+      "popularMovie": false,
+      "badge": "New Season",
+      "tagline": "Sharpen your blade. The Hashira assemble before the final battle against Muzan Kibutsuji.",
+      "year": 2024,
+      "rating": "9.0",
+      "durationLabel": "",
+      "match": "97% Match",
+      "maturity": "TV-MA",
+      "genres": [
+        "Dark Fantasy",
+        "Action",
+        "Supernatural"
+      ],
+      "synopsis": "Tanjiro Kamado undergoes grueling Hashira Training to master his Sun Breathing technique as the Infinity Castle looms in the darkness.",
+      "artworkUrl": "",
+      "defaultEpisode": {
+        "season": 4,
+        "number": 1,
+        "code": "S4 E1",
+        "progress": 0.42
+      },
+      "sortOrder": 2,
+      "seasons": {
+        "3": [
+          {
+            "id": "ds-s3-e1",
+            "season": 3,
+            "number": 1,
+            "code": "S3 E1",
+            "title": "Someone's Dream",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s3-e2",
+            "season": 3,
+            "number": 2,
+            "code": "S3 E2",
+            "title": "Yoriichi Type Zero",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s3-e3",
+            "season": 3,
+            "number": 3,
+            "code": "S3 E3",
+            "title": "A Sword from Over 300 Years Ago",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s3-e4",
+            "season": 3,
+            "number": 4,
+            "code": "S3 E4",
+            "title": "Thank You, Tokito",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          }
+        ],
+        "4": [
+          {
+            "id": "ds-s4-e1",
+            "season": 4,
+            "number": 1,
+            "code": "S4 E1",
+            "title": "To Defeat Muzan Kibutsuji",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s4-e2",
+            "season": 4,
+            "number": 2,
+            "code": "S4 E2",
+            "title": "Water Hashira Giyu Tomioka's Pain",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s4-e3",
+            "season": 4,
+            "number": 3,
+            "code": "S4 E3",
+            "title": "Fully Recovered Tanjiro Joins the Training!",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s4-e4",
+            "season": 4,
+            "number": 4,
+            "code": "S4 E4",
+            "title": "To Bring a Smile to One's Face",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "ds-s4-e5",
+            "season": 4,
+            "number": 5,
+            "code": "S4 E5",
+            "title": "I Even Ate Demons...",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "attack-on-titan",
+      "title": "Attack on Titan",
+      "titleWhite": "Attack on",
+      "titleCrimson": "Titan",
+      "type": "anime",
+      "category": "series",
+      "featured": true,
+      "popularMovie": false,
+      "badge": "Final Chapters",
+      "tagline": "Across the sea, beyond the walls — freedom demands an unforgettable price.",
+      "year": 2023,
+      "rating": "9.4",
+      "durationLabel": "",
+      "match": "99% Match",
+      "maturity": "TV-MA",
+      "genres": [
+        "Dark Fantasy",
+        "Drama",
+        "Military"
+      ],
+      "synopsis": "In Liberio, the Survey Corps launches a lightning raid beneath the night sky as Eren Yeager confronts the War Hammer Titan.",
+      "artworkUrl": "",
+      "defaultEpisode": {
+        "season": 4,
+        "number": 7,
+        "code": "S4 E7",
+        "progress": 0.36
+      },
+      "sortOrder": 3,
+      "seasons": {
+        "4": [
+          {
+            "id": "aot-s4-e7",
+            "season": 4,
+            "number": 7,
+            "code": "S4 E7",
+            "title": "Assault",
+            "duration": 1440,
+            "synopsis": "The Colossal Titan detonates the harbor as Marley's forces scramble to hold the internment zone.",
+            "videoUrl": ""
+          },
+          {
+            "id": "aot-s4-e8",
+            "season": 4,
+            "number": 8,
+            "code": "S4 E8",
+            "title": "Assassin's Bullet",
+            "duration": 1440,
+            "synopsis": "Aboard the retreating airship, celebration turns to tragedy in a single heartbeat.",
+            "videoUrl": ""
+          },
+          {
+            "id": "aot-s4-e9",
+            "season": 4,
+            "number": 9,
+            "code": "S4 E9",
+            "title": "Brave Volunteers",
+            "duration": 1440,
+            "synopsis": "Memories of Paradis Island's uneasy alliance with the Anti-Marleyan Volunteers surface.",
+            "videoUrl": ""
+          },
+          {
+            "id": "aot-s4-e10",
+            "season": 4,
+            "number": 10,
+            "code": "S4 E10",
+            "title": "A Sound Argument",
+            "duration": 1440,
+            "synopsis": "Political tensions boil over as Paradis debates the fate of the Founding Titan.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "steins-gate",
+      "title": "Steins;Gate",
+      "titleWhite": "Steins;",
+      "titleCrimson": "Gate",
+      "type": "anime",
+      "category": "series",
+      "featured": false,
+      "popularMovie": false,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 2011,
+      "rating": "9.2",
+      "durationLabel": "",
+      "match": "96% Match",
+      "maturity": "TV-14",
+      "genres": [
+        "Sci-Fi",
+        "Thriller",
+        "Psychological"
+      ],
+      "synopsis": "Self-proclaimed mad scientist Rintaro Okabe accidentally discovers a method to send text messages into the past, unraveling a dangerous conspiracy across diverging worldlines.",
+      "artworkUrl": "",
+      "defaultEpisode": {
+        "season": 1,
+        "number": 1,
+        "code": "S1 E1",
+        "progress": 0.44
+      },
+      "sortOrder": 4,
+      "seasons": {
+        "1": [
+          {
+            "id": "sg-s1-e1",
+            "season": 1,
+            "number": 1,
+            "code": "S1 E1",
+            "title": "Turning Point",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "sg-s1-e2",
+            "season": 1,
+            "number": 2,
+            "code": "S1 E2",
+            "title": "Time Travel Paranoia",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "sg-s1-e3",
+            "season": 1,
+            "number": 3,
+            "code": "S1 E3",
+            "title": "Parallel World Paranoia",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "sg-s1-e4",
+            "season": 1,
+            "number": 4,
+            "code": "S1 E4",
+            "title": "Interpreter Rendezvous",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          },
+          {
+            "id": "sg-s1-e5",
+            "season": 1,
+            "number": 5,
+            "code": "S1 E5",
+            "title": "Starmine Rendezvous",
+            "duration": 1440,
+            "synopsis": "As twilight deepens over the hidden valley, loyalties are forged in fire and a pivotal confrontation alters the fate of everyone involved.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "jujutsu-kaisen",
+      "title": "Jujutsu Kaisen",
+      "titleWhite": "Jujutsu",
+      "titleCrimson": "Kaisen",
+      "type": "anime",
+      "category": "series",
+      "featured": false,
+      "popularMovie": false,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 2023,
+      "rating": "8.9",
+      "durationLabel": "",
+      "match": "97% Match",
+      "maturity": "TV-MA",
+      "genres": [
+        "Supernatural",
+        "Action",
+        "Dark Fantasy"
+      ],
+      "synopsis": "Under the veil of Shibuya on Halloween night, Ryomen Sukuna awakens to unleash Malevolent Shrine in a cataclysmic clash.",
+      "artworkUrl": "",
+      "defaultEpisode": {
+        "season": 2,
+        "number": 17,
+        "code": "S2 E17",
+        "progress": 0.68
+      },
+      "sortOrder": 5,
+      "seasons": {
+        "2": [
+          {
+            "id": "jjk-s2-e17",
+            "season": 2,
+            "number": 17,
+            "code": "S2 E17",
+            "title": "Thunderclap, Part 2",
+            "duration": 1440,
+            "synopsis": "Sukuna faces the Divine General Mahoraga in a city-shattering duel.",
+            "videoUrl": ""
+          },
+          {
+            "id": "jjk-s2-e18",
+            "season": 2,
+            "number": 18,
+            "code": "S2 E18",
+            "title": "Right and Wrong",
+            "duration": 1440,
+            "synopsis": "Yuji confronts the aftermath of Shibuya before crossing paths with Mahito.",
+            "videoUrl": ""
+          },
+          {
+            "id": "jjk-s2-e19",
+            "season": 2,
+            "number": 19,
+            "code": "S2 E19",
+            "title": "Right and Wrong, Part 2",
+            "duration": 1440,
+            "synopsis": "Nobara enters the fray with Resonance as shadows close in.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "your-name",
+      "title": "Your Name",
+      "titleWhite": "Your",
+      "titleCrimson": "Name",
+      "type": "movie",
+      "category": "movies",
+      "featured": false,
+      "popularMovie": true,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 2016,
+      "rating": "9.0",
+      "durationLabel": "1h 46m",
+      "match": "98% Match",
+      "maturity": "PG",
+      "genres": [
+        "Romance",
+        "Supernatural",
+        "Drama"
+      ],
+      "synopsis": "Two strangers find themselves linked across time and space through mysterious dreams as a once-in-a-millennium comet streaks across the crimson twilight sky.",
+      "artworkUrl": "",
+      "defaultEpisode": null,
+      "sortOrder": 6,
+      "seasons": {
+        "1": [
+          {
+            "id": "yn-movie",
+            "season": 1,
+            "number": 1,
+            "code": "MOVIE",
+            "title": "Your Name (Full Feature)",
+            "duration": 6360,
+            "synopsis": "Mitsuha and Taki race against time to rewrite destiny before Kataware-doki fades.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "spirited-away",
+      "title": "Spirited Away",
+      "titleWhite": "Spirited",
+      "titleCrimson": "Away",
+      "type": "movie",
+      "category": "movies",
+      "featured": false,
+      "popularMovie": true,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 2001,
+      "rating": "9.3",
+      "durationLabel": "2h 05m",
+      "match": "99% Match",
+      "maturity": "PG",
+      "genres": [
+        "Fantasy",
+        "Adventure",
+        "Classic"
+      ],
+      "synopsis": "Ten-year-old Chihiro wanders into a mesmerizing spirit realm ruled by gods, witches, and spirits, where she must find the courage to free her parents.",
+      "artworkUrl": "",
+      "defaultEpisode": null,
+      "sortOrder": 7,
+      "seasons": {
+        "1": [
+          {
+            "id": "sa-movie",
+            "season": 1,
+            "number": 1,
+            "code": "MOVIE",
+            "title": "Spirited Away (Remastered 4K)",
+            "duration": 7500,
+            "synopsis": "A timeless journey through Yubaba's bathhouse and the glowing sea railway.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "suzume",
+      "title": "Suzume",
+      "titleWhite": "Suzume",
+      "titleCrimson": "no Tojimari",
+      "type": "movie",
+      "category": "movies",
+      "featured": false,
+      "popularMovie": true,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 2022,
+      "rating": "8.5",
+      "durationLabel": "2h 02m",
+      "match": "95% Match",
+      "maturity": "PG",
+      "genres": [
+        "Adventure",
+        "Fantasy",
+        "Drama"
+      ],
+      "synopsis": "A seventeen-year-old girl discovers a weathered door standing alone amidst ruins, embarking on a cross-Japan odyssey to close portals of disaster.",
+      "artworkUrl": "",
+      "defaultEpisode": null,
+      "sortOrder": 8,
+      "seasons": {
+        "1": [
+          {
+            "id": "sz-movie",
+            "season": 1,
+            "number": 1,
+            "code": "MOVIE",
+            "title": "Suzume (Full Feature)",
+            "duration": 7320,
+            "synopsis": "Across abandoned ruins, Suzume and Souta seal the Ever-After.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "akira",
+      "title": "Akira",
+      "titleWhite": "Akira",
+      "titleCrimson": "Neo-Tokyo",
+      "type": "movie",
+      "category": "movies",
+      "featured": false,
+      "popularMovie": true,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 1988,
+      "rating": "8.9",
+      "durationLabel": "2h 04m",
+      "match": "96% Match",
+      "maturity": "R",
+      "genres": [
+        "Cyberpunk",
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "In the neon-lit streets of Neo-Tokyo 2019, biker gang leader Kaneda must save his friend Tetsuo after a secret military project awakens uncontrollable psychic power.",
+      "artworkUrl": "",
+      "defaultEpisode": null,
+      "sortOrder": 9,
+      "seasons": {
+        "1": [
+          {
+            "id": "ak-movie",
+            "season": 1,
+            "number": 1,
+            "code": "MOVIE",
+            "title": "Akira (4K Director Restoration)",
+            "duration": 7440,
+            "synopsis": "The landmark cyberpunk masterpiece restored in ultra-crisp crimson contrast.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "a-silent-voice",
+      "title": "A Silent Voice",
+      "titleWhite": "A Silent",
+      "titleCrimson": "Voice",
+      "type": "movie",
+      "category": "movies",
+      "featured": false,
+      "popularMovie": true,
+      "badge": "Trending Now",
+      "tagline": "",
+      "year": 2016,
+      "rating": "9.1",
+      "durationLabel": "2h 10m",
+      "match": "98% Match",
+      "maturity": "PG-13",
+      "genres": [
+        "Drama",
+        "Slice of Life",
+        "Romance"
+      ],
+      "synopsis": "Haunted by past regrets, Shoya Ishida seeks redemption by reconnecting with Shoko Nishimiya, a deaf classmate he once alienated.",
+      "artworkUrl": "",
+      "defaultEpisode": null,
+      "sortOrder": 10,
+      "seasons": {
+        "1": [
+          {
+            "id": "asv-movie",
+            "season": 1,
+            "number": 1,
+            "code": "MOVIE",
+            "title": "A Silent Voice (Full Feature)",
+            "duration": 7800,
+            "synopsis": "A deeply moving story of forgiveness, empathy, and learning to listen.",
+            "videoUrl": ""
+          }
+        ]
+      }
+    }
+  ],
+  "subtitles": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 14,
+      "sub": "“Beneath the crimson blood moon, every oath is tested...”",
+      "dub": "[Atmospheric Wind & Distant Taiko Drums]"
+    },
+    {
+      "id": 2,
+      "start": 15,
+      "end": 42,
+      "sub": "♪ Opening Theme — Silhouette of Scarlet Dawn ♪",
+      "dub": "♪ Opening Theme — Scarlet Horizon (Eng Ver.) ♪"
+    },
+    {
+      "id": 3,
+      "start": 43,
+      "end": 90,
+      "sub": "♪ Breaking through the shadows, we carry the flame forward ♪",
+      "dub": "♪ Breaking through the shadows, our resolve never fades ♪"
+    },
+    {
+      "id": 4,
+      "start": 91,
+      "end": 135,
+      "sub": "“You came all this way alone? The night belongs to us now.”",
+      "dub": "“You came all this way by yourself? Then witness the night.”"
+    },
+    {
+      "id": 5,
+      "start": 136,
+      "end": 195,
+      "sub": "“I made a promise I intend to keep — no matter the cost.”",
+      "dub": "“I swore I would protect them, even if it takes everything I have.”"
+    },
+    {
+      "id": 6,
+      "start": 196,
+      "end": 270,
+      "sub": "“Then draw your blade... and show me the strength of your resolve!”",
+      "dub": "“Show me what your conviction is really worth!”"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n1",
+      "titleId": "demon-slayer",
+      "season": 4,
+      "epNum": 1,
+      "heading": "Demon Slayer S4 E1",
+      "text": "New simulcast episode is now streaming in 1080p HD.",
+      "time": "12m ago",
+      "unread": true
+    },
+    {
+      "id": "n2",
+      "titleId": "one-piece",
+      "season": 1,
+      "epNum": 1024,
+      "heading": "One Piece S1 E1024",
+      "text": "Continue where you left off — Wano climax arc.",
+      "time": "1h ago",
+      "unread": true
+    },
+    {
+      "id": "n3",
+      "titleId": "jujutsu-kaisen",
+      "season": 2,
+      "epNum": 17,
+      "heading": "Jujutsu Kaisen S2 E17",
+      "text": "Shibuya Incident Blu-ray uncensored cut available.",
+      "time": "3h ago",
+      "unread": true
+    }
+  ]
+}

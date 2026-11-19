@@ -1,0 +1,103 @@
+/* ==========================================================================
+   BASE — reset, typography, utilities, scrollbar, focus
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, p { margin: 0; }
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+
+img, svg, canvas { display: block; max-width: 100%; }
+img { object-fit: cover; }
+
+::selection { background: var(--crimson); color: #fff; }
+
+kbd {
+  font-family: inherit;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--kbd-bg);
+  color: var(--text-2);
+  font-size: 11px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--crimson-bright); }
+
+/* Keyboard focus ring (mouse clicks stay clean) */
+:focus-visible {
+  outline: 2px solid var(--crimson-bright);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+input:focus-visible,
+select:focus-visible { outline-offset: 0; }
+
+/* ---------------- Utilities ---------------- */
+.is-hidden { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clamp-1, .clamp-2 {
+  display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;
+}
+.clamp-1 { -webkit-line-clamp: 1; line-clamp: 1; }
+.clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Icon sizes (all SVG icons use currentColor) */
+.ico { width: 19px; height: 19px; flex-shrink: 0; }
+.ico-lg { width: 21px; height: 21px; flex-shrink: 0; }
+.ico-sm { width: 16px; height: 16px; flex-shrink: 0; }
+.ico-xs { width: 14px; height: 14px; flex-shrink: 0; }
+.ico-fill { fill: currentColor; }
+.ico-stroke { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }

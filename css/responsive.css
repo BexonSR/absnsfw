@@ -1,0 +1,175 @@
+/* ==========================================================================
+   RESPONSIVE — scales the mobile-first base up.
+   Breakpoints:  480 (large phone) · 640 (small tablet) · 768 (tablet)
+                 1024 (laptop: sidebar docks) · 1280 (episodes beside player) · 1536 (wide)
+   ========================================================================== */
+
+/* ---------------- Phones (< 768px): bottom tab bar ---------------- */
+@media (max-width: 767px) {
+  .tabbar { display: grid; }
+  .app-shell { padding-bottom: calc(var(--tabbar-h) + 28px + var(--safe-bottom)); }
+  .toast-container { left: calc(12px + var(--safe-left)); right: calc(12px + var(--safe-right)); max-width: none; bottom: calc(var(--tabbar-h) + 24px + var(--safe-bottom)); }
+  body.is-player .toast-container { bottom: calc(16px + var(--safe-bottom)); }
+  .topbar__sep { display: none; }
+  .search__kbd { display: none; }
+  .cinebar__label-long { display: none; }
+  .cinebar__label-short { display: inline; }
+  .hide-mobile { display: none !important; }
+}
+
+/* ---------------- Phones (< 640px) ---------------- */
+@media (max-width: 639px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-left: 0;
+  }
+  .topbar__left {
+    order: 2;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  .topbar__right {
+    order: 1;
+    width: 100%;
+    min-height: 42px;
+    padding-left: 50px;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .topbar__right .btn-sm {
+    min-height: 36px;
+    padding: 0 9px;
+    font-size: 11px;
+    gap: 5px;
+  }
+  .topbar__right .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .section-line { display: none; }
+  .hero__arrows { display: none; }
+  .hero { min-height: 400px; }
+  .hero__actions .btn { flex: 1 1 auto; }
+  .hero__tagline { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+
+  /* Home rows become swipeable carousels instead of tall stacks */
+  .snap-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: -12px;
+    padding-inline: 12px;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .snap-row::-webkit-scrollbar { display: none; }
+  .snap-row > * { flex: 0 0 78%; scroll-snap-align: start; }
+
+  .ep-row__thumb { width: 92px; }
+  .modal { align-items: flex-end; padding: 0; }
+  .modal__card { max-width: none; border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding-bottom: calc(22px + var(--safe-bottom)); }
+  .dropdown--notif { position: fixed; left: 12px; right: 12px; top: calc(70px + var(--safe-top)); width: auto; }
+
+  /* Player: compact controls so everything fits on 360px */
+  .controls { padding-top: 40px; }
+  .controls__row { gap: 4px; }
+  .ctl-btn { min-width: 38px; height: 38px; padding: 0 4px; }
+  .hide-xs { display: none !important; }
+  .ctl-time { margin-left: 2px; font-size: 11px; }
+  .skip-intro, .autonext { bottom: 82px; }
+  .shortcuts { display: none; }
+  .cinebar { padding: 8px 10px; margin-left: 50px; gap: 8px; }
+  .cinebar .btn-sm { min-height: 36px; padding: 0 9px; font-size: 11px; }
+  .cinebar .icon-btn { width: 36px; height: 36px; }
+  .ambient-halo { inset: -6px; filter: blur(22px); }
+  .site-footer__grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* ---------------- Large phones & up (>= 480px) ---------------- */
+@media (min-width: 480px) {
+  .grid-cards { gap: 18px; }
+}
+
+/* ---------------- Tablet (>= 768px) ---------------- */
+@media (min-width: 768px) {
+  .app-shell { padding: calc(16px + var(--safe-top)) calc(16px + var(--safe-right)) calc(16px + var(--safe-bottom)) calc(16px + var(--safe-left)); gap: 20px; }
+  .triangle-trigger {
+    top: calc(16px + var(--safe-top));
+    left: calc(16px + var(--safe-left));
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+  .triangle-trigger svg { width: 28px; height: 28px; }
+  .topbar { gap: 12px; padding-left: 56px; min-height: 44px; }
+  .cinebar { margin-left: 56px; min-height: 44px; }
+  .topbar__right { gap: 8px; }
+  .sidebar { left: calc(16px + var(--safe-left)); top: calc(16px + var(--safe-top)); height: calc(100dvh - 32px - var(--safe-top) - var(--safe-bottom)); }
+  .site-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------------- Laptop (>= 1024px): auto-hide proximity sidebar ---------------- */
+@media (min-width: 1024px) {
+  .app-shell { flex-direction: column; gap: 24px; padding: 20px; }
+  .triangle-trigger {
+    top: 20px;
+    left: 20px;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+  .triangle-trigger svg { width: 30px; height: 30px; }
+  .topbar { padding-left: 58px; min-height: 46px; }
+  .cinebar { margin-left: 58px; min-height: 46px; }
+  .sidebar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    height: calc(100vh - 40px);
+    height: calc(100dvh - 40px);
+    width: var(--sidebar-w);
+    overflow: visible;
+  }
+  .sidebar__brand-row { justify-content: flex-start; padding: 0 4px; }
+  .sidebar__close { display: none; }
+  .hamburger, .backdrop { display: none !important; }
+  .grid-cards.is-wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 232px), 1fr)); }
+  .site-footer__grid { grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(120px, 1fr)); }
+}
+@media (min-width: 1280px) {
+  /* Episode list sits beside the video */
+  .player-grid { grid-template-columns: minmax(0, 1fr) 365px; gap: 24px; }
+  .episodes { max-height: 760px; }
+}
+@media (min-width: 1536px) {
+  .grid-cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 248px), 1fr)); }
+}
+@media (min-width: 1840px) {
+  /* Centered 1720px app-shell already clears the fixed top-left triangle */
+  .topbar { padding-left: 0; }
+  .cinebar { margin-left: 0; }
+}
+
+/* ---------------- Short landscape phones ---------------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .player-stage { max-height: calc(100dvh - 70px); width: auto; margin-inline: auto; }
+  .hero { min-height: 300px; }
+  .tabbar { display: none; }
+  .app-shell { padding-bottom: 12px; }
+}
+
+/* ---------------- Touch-only polish ---------------- */
+@media (hover: none) {
+  .shortcuts { display: none; }
+  .icon-btn { width: 44px; height: 44px; }
+  .btn { min-height: 44px; }
+  .btn-sm { min-height: 38px; }
+  .topbar__right .icon-btn { width: 38px; height: 38px; }
+  .topbar__right .btn-sm { min-height: 36px; }
+}
+
+/* ---------------- Print: never ---------------- */
+@media print { body { display: none; } }

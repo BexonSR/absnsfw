@@ -1,0 +1,188 @@
+/* ==========================================================================
+   AUTH — Login, Registration, Live Username Checker & Profile Editor Modal
+   Works seamlessly in both Dark and Light themes via tokens.css variables.
+   ========================================================================== */
+
+.auth-modal__card {
+  width: 100%;
+  max-width: 440px;
+  max-height: 92dvh;
+  overflow-y: auto;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: cardIn 0.3s var(--ease-out-expo);
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 12px;
+  background: var(--field);
+  border: 1px solid var(--border);
+}
+
+.auth-tab {
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-muted);
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.auth-tab.is-active {
+  background: var(--crimson);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(229, 9, 20, 0.35);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 11px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--field);
+  border: 1px solid var(--border-strong);
+  transition: border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.form-textarea {
+  min-height: 78px;
+  padding: 10px 14px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--crimson-bright);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.username-status {
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.username-status.is-ok { color: var(--success); }
+.username-status.is-err { color: var(--accent-text); }
+
+.auth-error {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-text);
+}
+
+.demo-box {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--hover);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-box__title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.demo-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.demo-pill {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  transition: border-color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+.demo-pill strong {
+  font-size: 12px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.demo-pill span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+@media (hover: hover) {
+  .demo-pill:hover {
+    border-color: var(--crimson-bright);
+    background: var(--accent-soft-2);
+  }
+}
+
+.role-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--crimson);
+  color: #fff;
+}
+.role-pill.is-user {
+  background: var(--hover-strong);
+  color: var(--text-2);
+}
+
+/* Optional Full-Screen Login Gate when enabled in Studio */
+body.login-gated .app-shell,
+body.login-gated .tabbar {
+  filter: blur(14px);
+  pointer-events: none;
+  user-select: none;
+}

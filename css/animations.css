@@ -1,0 +1,111 @@
+/* ==========================================================================
+   ANIMATIONS — keyframes + motion rules.
+   Rules of this file:
+     • animate only transform / opacity (GPU-friendly)
+     • fill-mode "backwards" for entrances so the end state never overrides
+       hover transforms (the old build used "both", which froze cards)
+     • infinite animations pause when the tab is hidden or the element is
+       off-screen (see js/animations.js)
+     • honour prefers-reduced-motion and the in-app Reduced Motion setting
+   ========================================================================== */
+
+@keyframes kenBurns {
+  0%   { transform: scale(1.01) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.08) translate3d(-1.2%, -0.8%, 0); }
+  100% { transform: scale(1.01) translate3d(0, 0, 0); }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translate3d(0, 20px, 0) scale(0.97); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes popBounce {
+  0%   { transform: scale(0.7); }
+  55%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: translate3d(0, -6px, 0) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes eq1 { 0%, 100% { transform: scaleY(0.28); } 50% { transform: scaleY(1); } }
+@keyframes eq2 { 0%, 100% { transform: scaleY(0.95); } 45% { transform: scaleY(0.22); } }
+@keyframes eq3 { 0%, 100% { transform: scaleY(0.42); } 60% { transform: scaleY(0.88); } }
+@keyframes ambientBreath {
+  0%, 100% { opacity: 0.58; transform: scale(1); }
+  50%      { opacity: 0.92; transform: scale(1.035); }
+}
+@keyframes seekRipple {
+  from { opacity: 0.95; transform: scale(0.65); }
+  to   { opacity: 0;    transform: scale(1.65); }
+}
+
+/* ---- Applied animations ---- */
+.hero__img { animation: kenBurns 22s ease-in-out infinite; }
+.hero.is-offscreen .hero__img { animation-play-state: paused; }
+
+.pulse { position: relative; }
+.notif-dot.pulse { position: absolute; }
+.pulse::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--crimson-bright);
+  animation: pulseRing 2s ease-out infinite;
+  pointer-events: none;
+}
+
+.hero-in { animation: riseIn 0.62s var(--ease-out-expo) backwards; }
+.pop-bounce { animation: popBounce 0.38s var(--ease-spring); }
+.ambient-halo:not(.is-off) { animation: ambientBreath 5.2s ease-in-out infinite; }
+.seek-ripple__orb.is-anim { animation: seekRipple 0.52s var(--ease-out-expo) forwards; }
+
+/* Scroll reveal: js/animations.js adds .is-in when the element enters view */
+.reveal:not(.is-in) { opacity: 0; }
+.reveal.is-in {
+  animation: cardIn 0.55s var(--ease-out-expo) backwards;
+  animation-delay: calc(min(var(--i, 0), 8) * 55ms);
+}
+
+/* Smooth colour change while the theme flips (class lives ~400ms) */
+:root.theme-anim *,
+:root.theme-anim *::before,
+:root.theme-anim *::after {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, fill 0.35s ease !important;
+}
+
+/* Pause everything infinite while the tab is hidden */
+:root.is-tab-hidden *,
+:root.is-tab-hidden *::before,
+:root.is-tab-hidden *::after { animation-play-state: paused !important; }
+
+/* ---- Reduced motion (OS preference) ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero__img, .ambient-halo, .pulse::after { animation: none !important; }
+  .reveal:not(.is-in) { opacity: 1; }
+}
+/* ---- Reduced motion (in-app setting) ---- */
+:root.reduced-motion *,
+:root.reduced-motion *::before,
+:root.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+:root.reduced-motion .hero__img,
+:root.reduced-motion .ambient-halo,
+:root.reduced-motion .pulse::after { animation: none !important; }
+:root.reduced-motion .reveal:not(.is-in) { opacity: 1; }
